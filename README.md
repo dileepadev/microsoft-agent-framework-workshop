@@ -8,12 +8,12 @@ A hands-on workshop teaching how to build AI chat agents using Microsoft Agent F
   - [Prerequisites](#prerequisites)
   - [Tech Stack](#tech-stack)
   - [Getting Started](#getting-started)
-    - [Step 1: Environment Setup](#step-1-environment-setup)
-    - [Step 2: GitHub Models Connection](#step-2-github-models-connection)
-    - [Step 3: Microsoft Agent Framework Agents](#step-3-microsoft-agent-framework-agents)
-    - [Step 4: Chat User Interface](#step-4-chat-user-interface)
-    - [Step 5: Tool Calling](#step-5-tool-calling)
-    - [Step 6: MCP Integration](#step-6-mcp-integration)
+    - [Module 1: Environment Setup](#module-1-environment-setup)
+    - [Module 2: GitHub Models Connection](#module-2-github-models-connection)
+    - [Module 3: Microsoft Agent Framework Agents](#module-3-microsoft-agent-framework-agents)
+    - [Module 4: Chat User Interface](#module-4-chat-user-interface)
+    - [Module 5: Tool Calling](#module-5-tool-calling)
+    - [Module 6: MCP Integration](#module-6-mcp-integration)
   - [Quick Setup (Reference)](#quick-setup-reference)
     - [Clone the Repository](#clone-the-repository)
     - [Install uv](#install-uv)
@@ -83,29 +83,29 @@ This workshop uses:
 
 ## Getting Started
 
-Follow the workshop in order. Each step has a dedicated guide:
+Follow the workshop in order. Each module has a dedicated guide:
 
-### Step 1: Environment Setup
+### Module 1: Environment Setup
 
 - Guide: [docs/getting-started/1-environment-setup.md](docs/getting-started/1-environment-setup.md)
 
-### Step 2: GitHub Models Connection
+### Module 2: GitHub Models Connection
 
 - Guide: [docs/getting-started/2-github-models-connection.md](docs/getting-started/2-github-models-connection.md)
 
-### Step 3: Microsoft Agent Framework Agents
+### Module 3: Microsoft Agent Framework Agents
 
 - Guide: [docs/getting-started/3-microsoft-agent-framework-agents.md](docs/getting-started/3-microsoft-agent-framework-agents.md)
 
-### Step 4: Chat User Interface
+### Module 4: Chat User Interface
 
 - Guide: [docs/getting-started/4-chat-user-interface.md](docs/getting-started/4-chat-user-interface.md)
 
-### Step 5: Tool Calling
+### Module 5: Tool Calling
 
 - Guide: [docs/getting-started/5-tool-calling.md](docs/getting-started/5-tool-calling.md)
 
-### Step 6: MCP Integration
+### Module 6: MCP Integration
 
 - Guide: [docs/getting-started/6-mcp-integration.md](docs/getting-started/6-mcp-integration.md)
 
