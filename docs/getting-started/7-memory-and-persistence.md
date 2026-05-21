@@ -320,4 +320,4 @@ Type 'exit' to stop.
 
 ## Next
 
-Continue to [Module 8 - Chat User Interface](8-chat-user-interface.md)
+Continue to [Module 8 - Workflows](8-workflows.md)
