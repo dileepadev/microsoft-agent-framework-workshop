@@ -177,4 +177,4 @@ This module uses the OpsAgent identity from the workshop overview:
 
 ## Next
 
-Continue to [4. Chat User Interface](./4-chat-user-interface.md).
+Continue to [4. Tool Calling](./4-tool-calling.md).
