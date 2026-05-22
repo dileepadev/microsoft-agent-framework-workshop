@@ -1,6 +1,9 @@
 # Custom
 docs/introduction.md
 
+# Azure Functions — local settings contain secrets, never commit
+local.settings.json
+
 # Visual Studio Code
 .vscode/
 

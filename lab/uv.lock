@@ -13,6 +13,9 @@ resolution-markers = [
     "python_full_version < '3.13' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
+[options]
+prerelease-mode = "allow"
+
 [[package]]
 name = "a2a-sdk"
 version = "1.0.3"
@@ -2040,6 +2043,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "agent-framework" },
+    { name = "agent-framework-azurefunctions" },
     { name = "chainlit" },
     { name = "fastapi", extra = ["standard"] },
     { name = "httpx" },
@@ -2051,6 +2055,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "agent-framework", specifier = ">=1.5.0" },
+    { name = "agent-framework-azurefunctions", specifier = ">=1.0.0b260519" },
     { name = "chainlit", specifier = ">=2.11.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.133.0" },
     { name = "httpx", specifier = ">=0.28.1" },
