@@ -1,0 +1,133 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Microsoft Agent Framework Workshop",
+  description = "A hands-on workshop for building AI agents with Microsoft Agent Framework, GitHub Models, and MCP servers.",
+} = Astro.props;
+
+const pageTitle =
+  title === "Microsoft Agent Framework Workshop"
+    ? title
+    : `${title} — MAF Workshop`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Prevent FOUC: apply theme before paint -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body
+    class="bg-white dark:bg-[#0c0c11] text-gray-900 dark:text-gray-100 font-sans min-h-screen flex flex-col"
+  >
+    <Header />
+    <div class="flex-1">
+      <slot />
+    </div>
+    <Footer />
+
+    <!-- Mermaid: convert shiki-highlighted blocks → mermaid divs, then render -->
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+      function initMermaid() {
+        const isDark = document.documentElement.classList.contains("dark");
+
+        // Unwrap shiki-highlighted mermaid code blocks
+        document
+          .querySelectorAll("pre code.language-mermaid")
+          .forEach((code) => {
+            const pre = code.parentElement;
+            const wrapper = document.createElement("div");
+            wrapper.className = "mermaid";
+            wrapper.textContent = code.textContent || "";
+            pre?.parentNode?.replaceChild(wrapper, pre);
+          });
+
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? "dark" : "neutral",
+          securityLevel: "loose",
+          fontFamily: "Inter, system-ui, sans-serif",
+        });
+      }
+
+      initMermaid();
+
+      // Expose for theme toggle
+      window.__reinitMermaid = initMermaid;
+    </script>
+
+    <!-- Copy buttons for all code blocks -->
+    <script>
+      const COPY_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+      const CHECK_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+      document.querySelectorAll("pre.astro-code").forEach((pre) => {
+        const btn = document.createElement("button");
+        btn.className = "code-copy-btn";
+        btn.setAttribute("aria-label", "Copy code to clipboard");
+        btn.title = "Copy";
+        btn.innerHTML = COPY_ICON;
+        pre.appendChild(btn);
+
+        btn.addEventListener("click", async () => {
+          const code =
+            pre.querySelector("code")?.textContent ?? pre.textContent ?? "";
+          try {
+            await navigator.clipboard.writeText(code);
+            window.getSelection()?.removeAllRanges();
+            btn.innerHTML = CHECK_ICON;
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.innerHTML = COPY_ICON;
+              btn.classList.remove("copied");
+            }, 2000);
+          } catch {
+            // Fallback for older browsers
+            const ta = document.createElement("textarea");
+            ta.value = code;
+            ta.style.cssText = "position:fixed;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            window.getSelection()?.removeAllRanges();
+            btn.innerHTML = CHECK_ICON;
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.innerHTML = COPY_ICON;
+              btn.classList.remove("copied");
+            }, 2000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

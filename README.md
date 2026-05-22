@@ -11,9 +11,13 @@ A hands-on workshop teaching how to build AI chat agents using Microsoft Agent F
     - [Module 1: Environment Setup](#module-1-environment-setup)
     - [Module 2: GitHub Models Connection](#module-2-github-models-connection)
     - [Module 3: Microsoft Agent Framework Agents](#module-3-microsoft-agent-framework-agents)
-    - [Module 4: Chat User Interface](#module-4-chat-user-interface)
-    - [Module 5: Tool Calling](#module-5-tool-calling)
-    - [Module 6: MCP Integration](#module-6-mcp-integration)
+    - [Module 4: Tool Calling](#module-4-tool-calling)
+    - [Module 5: MCP Integration](#module-5-mcp-integration)
+    - [Module 6: Multi-Turn Conversations](#module-6-multi-turn-conversations)
+    - [Module 7: Memory and Persistence](#module-7-memory-and-persistence)
+    - [Module 8: Workflows](#module-8-workflows)
+    - [Module 9: Chat User Interface](#module-9-chat-user-interface)
+    - [Module 10: Host Agent](#module-10-host-agent)
   - [Quick Setup (Reference)](#quick-setup-reference)
     - [Clone the Repository](#clone-the-repository)
     - [Install uv](#install-uv)
@@ -97,17 +101,33 @@ Follow the workshop in order. Each module has a dedicated guide:
 
 - Guide: [docs/getting-started/3-microsoft-agent-framework-agents.md](docs/getting-started/3-microsoft-agent-framework-agents.md)
 
-### Module 4: Chat User Interface
+### Module 4: Tool Calling
 
-- Guide: [docs/getting-started/4-chat-user-interface.md](docs/getting-started/4-chat-user-interface.md)
+- Guide: [docs/getting-started/4-tool-calling.md](docs/getting-started/4-tool-calling.md)
 
-### Module 5: Tool Calling
+### Module 5: MCP Integration
 
-- Guide: [docs/getting-started/5-tool-calling.md](docs/getting-started/5-tool-calling.md)
+- Guide: [docs/getting-started/5-mcp-integration.md](docs/getting-started/5-mcp-integration.md)
 
-### Module 6: MCP Integration
+### Module 6: Multi-Turn Conversations
 
-- Guide: [docs/getting-started/6-mcp-integration.md](docs/getting-started/6-mcp-integration.md)
+- Guide: [docs/getting-started/6-multi-turn-conversations.md](docs/getting-started/6-multi-turn-conversations.md)
+
+### Module 7: Memory and Persistence
+
+- Guide: [docs/getting-started/7-memory-and-persistence.md](docs/getting-started/7-memory-and-persistence.md)
+
+### Module 8: Workflows
+
+- Guide: [docs/getting-started/8-workflows.md](docs/getting-started/8-workflows.md)
+
+### Module 9: Chat User Interface
+
+- Guide: [docs/getting-started/9-chat-user-interface.md](docs/getting-started/9-chat-user-interface.md)
+
+### Module 10: Host Agent
+
+- Guide: [docs/getting-started/10-host-agent.md](docs/getting-started/10-host-agent.md)
 
 ## Quick Setup (Reference)
 
@@ -197,9 +217,13 @@ GITHUB_MODEL=gpt-4o-mini
 │       ├── 1-environment-setup.md
 │       ├── 2-github-models-connection.md
 │       ├── 3-microsoft-agent-framework-agents.md
-│       ├── 4-chat-user-interface.md
-│       ├── 5-tool-calling.md
-│       └── 6-mcp-integration.md
+│       ├── 4-tool-calling.md
+│       ├── 5-mcp-integration.md
+│       ├── 6-multi-turn-conversations.md
+│       ├── 7-memory-and-persistence.md
+│       ├── 8-workflows.md
+│       ├── 9-chat-user-interface.md
+│       └── 10-host-agent.md
 ├── requirements.txt
 ├── .env
 └── README.md
@@ -210,10 +234,13 @@ GITHUB_MODEL=gpt-4o-mini
 - Introduction to AI agents
 - Understanding Microsoft Agent Framework
 - Working with GitHub Models
-- Building chat interfaces
-- Conversation memory
 - Tool calling
 - MCP integration
+- Multi-turn conversations
+- Memory and persistence
+- Building chat interfaces
+- Workflows and orchestration
+- Host agent architecture
 - Multi-agent workflows
 - Deployment basics
 

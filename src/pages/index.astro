@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+const modules = [
+  { num: '01', title: 'Environment Setup',        desc: 'Configure Python, GitHub Models, and your development environment.',                       href: '/getting-started/1-environment-setup' },
+  { num: '02', title: 'GitHub Models Connection',  desc: 'Connect to GitHub Models endpoint and test AI inference.',                                  href: '/getting-started/2-github-models-connection' },
+  { num: '03', title: 'Agent Framework Agents',    desc: 'Build your first intelligent agent with Microsoft Agent Framework.',                         href: '/getting-started/3-microsoft-agent-framework-agents' },
+  { num: '04', title: 'Tool Calling',              desc: 'Extend agents with custom tools and function calling capabilities.',                         href: '/getting-started/4-tool-calling' },
+  { num: '05', title: 'MCP Integration',           desc: 'Connect Model Context Protocol servers for rich external context.',                          href: '/getting-started/5-mcp-integration' },
+  { num: '06', title: 'Multi-turn Conversations',  desc: 'Enable agents to maintain context and memory across conversation turns.',                    href: '/getting-started/6-multi-turn-conversations' },
+  { num: '07', title: 'Memory & Persistence',      desc: 'Implement conversation history and long-term agent memory.',                                 href: '/getting-started/7-memory-and-persistence' },
+  { num: '08', title: 'Workflows',                 desc: 'Orchestrate complex multi-step AI workflows and task pipelines.',                            href: '/getting-started/8-workflows' },
+  { num: '09', title: 'Chat User Interface',       desc: 'Build interactive chat UIs with Chainlit and Streamlit.',                                    href: '/getting-started/9-chat-user-interface' },
+  { num: '10', title: 'Host Agent',                desc: 'Deploy OpsAgent to Azure Functions for production-grade hosting.',                           href: '/getting-started/10-host-agent' },
+];
+
+const features = [
+  { icon: '🤖', title: 'Microsoft Agent Framework',  desc: 'Build production-grade AI agents with the official Microsoft framework for autonomous reasoning agents.' },
+  { icon: '⚡', title: 'GitHub Models',               desc: 'Access frontier AI models — GPT-4o, o1 and more — directly via GitHub. No separate API key required.' },
+  { icon: '🔌', title: 'MCP Integration',             desc: 'Connect Model Context Protocol servers for real-time tool use, web search, and external service access.' },
+  { icon: '🧠', title: 'Memory & State',              desc: 'Implement conversation history and cross-session persistence for truly stateful agents.' },
+  { icon: '🛠️', title: 'Tool Calling',                desc: 'Extend agents with custom Python tools, REST APIs, and Azure service integrations.' },
+  { icon: '☁️', title: 'Azure Functions Hosting',    desc: 'Deploy production-ready agents to Azure Functions with durable task state and auto-scaling.' },
+];
+
+const stack = ['Python 3.12', 'Microsoft Agent Framework', 'Azure Functions', 'GitHub Models', 'MCP Protocol', 'Chainlit', 'Streamlit', 'FastAPI'];
+---
+
+<BaseLayout
+  title="Microsoft Agent Framework Workshop"
+  description="A hands-on 10-module workshop to build, extend and deploy OpsAgent — an intelligent DevOps assistant powered by GitHub Models and MCP."
+>
+
+  <!-- ── Hero ──────────────────────────────────────────────────── -->
+  <section class="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-4 text-center">
+
+    <!-- Background atmosphere -->
+    <div class="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+      <!-- Grid -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.04)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(99,102,241,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.06)_1px,transparent_1px)] [background-size:48px_48px]"></div>
+      <!-- Glow orbs -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-radial from-primary-500/20 via-violet-500/10 to-transparent blur-3xl animate-pulse-slow"></div>
+      <div class="absolute bottom-0 right-0 w-[500px] h-[400px] bg-gradient-radial from-violet-500/15 to-transparent blur-3xl animate-pulse-slow" style="animation-delay:3s"></div>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+
+      <!-- Badge -->
+      <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold
+                  bg-primary-50 dark:bg-primary-500/10
+                  text-primary-700 dark:text-primary-400
+                  border border-primary-200 dark:border-primary-500/30
+                  backdrop-blur-sm mb-8 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+        Hands-on AI Agent Development Workshop
+      </div>
+
+      <!-- Title -->
+      <h1 class="animate-fade-up animate-delay-100 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
+        <span class="text-gray-900 dark:text-white">Build AI Agents</span>
+        <br />
+        <span class="bg-gradient-to-r from-primary-500 via-violet-500 to-purple-500 bg-clip-text text-transparent">
+          with Microsoft Framework
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="animate-fade-up animate-delay-200 text-xl sm:text-2xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        A comprehensive 10-module workshop to build, extend, and deploy&nbsp;
+        <strong class="text-gray-700 dark:text-gray-200 font-semibold">OpsAgent</strong>&nbsp;—
+        an intelligent DevOps assistant powered by GitHub Models and MCP.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="animate-fade-up animate-delay-300 flex flex-wrap items-center justify-center gap-4 mb-16">
+        <a
+          href={`${base}/getting-started/1-environment-setup`}
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-base
+                 bg-gradient-to-r from-primary-500 to-violet-600
+                 hover:from-primary-600 hover:to-violet-700
+                 shadow-xl shadow-primary-500/30 hover:shadow-primary-500/50
+                 transition-all duration-300 hover:-translate-y-1
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+        >
+          Start Workshop
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a
+          href={`${base}/introduction`}
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base
+                 text-gray-700 dark:text-gray-200
+                 bg-white dark:bg-white/[0.05]
+                 border border-gray-200 dark:border-white/10
+                 hover:bg-gray-50 dark:hover:bg-white/[0.09]
+                 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+        >
+          Read Introduction
+        </a>
+        <a
+          href="https://github.com/dileepadev/microsoft-agent-framework-workshop"
+          target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-base
+                 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white
+                 transition-colors duration-200"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="animate-fade-up animate-delay-500 flex flex-wrap justify-center gap-10">
+        {([['10', 'Modules'] , ['5+', 'Technologies'], ['Azure', 'Production Ready']] as [string,string][]).map(([val, label]) => (
+          <div class="text-center">
+            <div class="text-3xl font-extrabold bg-gradient-to-r from-primary-500 to-violet-500 bg-clip-text text-transparent">{val}</div>
+            <div class="text-sm text-gray-400 dark:text-gray-500 mt-0.5 font-medium">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-300 dark:text-gray-600 animate-bounce" aria-hidden="true">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── What You'll Learn ─────────────────────────────────────── -->
+  <section class="py-28 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">What You'll Learn</h2>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+          From zero to a fully deployed AI agent — covering every layer of the modern stack.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {features.map((f) => (
+          <div class="group relative p-6 rounded-2xl
+                      bg-white dark:bg-white/[0.03]
+                      border border-gray-100 dark:border-white/[0.06]
+                      hover:border-primary-200 dark:hover:border-primary-500/30
+                      shadow-sm hover:shadow-xl hover:shadow-primary-500/5
+                      transition-all duration-300 hover:-translate-y-1.5 overflow-hidden">
+            <!-- Glow on hover -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-violet-500/0 group-hover:from-primary-500/5 group-hover:to-violet-500/5 transition-all duration-300 rounded-2xl pointer-events-none"></div>
+            <div class="text-3xl mb-4 leading-none">{f.icon}</div>
+            <h3 class="font-semibold text-gray-900 dark:text-white mb-2 text-base">{f.title}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Workshop Modules ──────────────────────────────────────── -->
+  <section class="py-28 px-4 bg-gray-50/80 dark:bg-white/[0.02]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Workshop Modules</h2>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+          10 structured modules, progressively building OpsAgent from scratch to production.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-3">
+        {modules.map((m) => (
+          <a
+            href={`${base}${m.href}`}
+            class="group flex items-start gap-4 p-5 rounded-2xl
+                   bg-white dark:bg-white/[0.03]
+                   border border-gray-100 dark:border-white/[0.06]
+                   hover:border-primary-200 dark:hover:border-primary-500/40
+                   shadow-sm hover:shadow-lg hover:shadow-primary-500/5
+                   transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <div class="w-10 h-10 flex-shrink-0 rounded-xl
+                        bg-primary-50 dark:bg-primary-500/10
+                        text-primary-600 dark:text-primary-400
+                        flex items-center justify-center
+                        font-mono font-bold text-sm
+                        group-hover:bg-primary-100 dark:group-hover:bg-primary-500/20 transition-colors">
+              {m.num}
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-gray-900 dark:text-white text-sm mb-1
+                          group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {m.title}
+              </div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{m.desc}</div>
+            </div>
+            <svg class="w-4 h-4 flex-shrink-0 text-gray-200 dark:text-white/20 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all duration-200 mt-1.5"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href={`${base}/getting-started/1-environment-setup`}
+          class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white text-lg
+                 bg-gradient-to-r from-primary-500 to-violet-600
+                 hover:from-primary-600 hover:to-violet-700
+                 shadow-xl shadow-primary-500/30 hover:shadow-primary-500/50
+                 transition-all duration-300 hover:-translate-y-1"
+        >
+          Begin Module 1
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tech Stack ────────────────────────────────────────────── -->
+  <section class="py-24 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Technologies Covered</h2>
+      <p class="text-gray-500 dark:text-gray-400 mb-10">The modern AI agent stack you'll master in this workshop.</p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        {stack.map((tech) => (
+          <span class="px-4 py-2 rounded-full text-sm font-medium
+                       bg-gray-100 dark:bg-white/[0.05]
+                       text-gray-700 dark:text-gray-300
+                       border border-gray-200 dark:border-white/[0.08]
+                       hover:border-primary-300 dark:hover:border-primary-500/40
+                       hover:text-primary-600 dark:hover:text-primary-400
+                       hover:bg-primary-50 dark:hover:bg-primary-500/10
+                       transition-all duration-200 cursor-default">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ─────────────────────────────────────────────── -->
+  <section class="py-24 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="relative rounded-3xl overflow-hidden p-12
+                  bg-gradient-to-br from-primary-600 via-violet-600 to-purple-700
+                  shadow-2xl shadow-primary-500/30">
+        <!-- Orb decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" aria-hidden="true"></div>
+
+        <div class="relative z-10">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Ready to build OpsAgent?</h2>
+          <p class="text-primary-100 text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+            Start with Module 1 and work through each module at your own pace. The complete workshop takes 3–5 hours.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={`${base}/getting-started/1-environment-setup`}
+              class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-primary-700
+                     bg-white hover:bg-primary-50
+                     shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+            >
+              Get Started Now
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <a
+              href="https://github.com/dileepadev/microsoft-agent-framework-workshop"
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white
+                     border border-white/30 hover:bg-white/10 transition-all duration-200"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Star on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

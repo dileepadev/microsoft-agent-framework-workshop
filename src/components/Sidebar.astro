@@ -1,0 +1,83 @@
+---
+import { navigation, isSection, flatNav } from "../data/nav";
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  const full = `${base}${href}`;
+  return (
+    currentPath === full ||
+    currentPath === full + "/" ||
+    currentPath.startsWith(full + "/")
+  );
+}
+---
+
+<aside
+  class="w-64 flex-shrink-0 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto
+         pb-10 pt-6 pr-4 hidden lg:block"
+  aria-label="Docs navigation"
+>
+  <nav class="space-y-6">
+    {
+      navigation.map((entry) =>
+        isSection(entry) ? (
+          <div>
+            <div class="flex items-center gap-2 px-3 mb-2">
+              {entry.icon && <span class="text-sm">{entry.icon}</span>}
+              <span class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                {entry.title}
+              </span>
+            </div>
+            <ul class="space-y-0.5">
+              {entry.items.map((item) => (
+                <li>
+                  <a
+                    href={`${base}${item.href}`}
+                    class:list={[
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 group",
+                      isActive(item.href)
+                        ? "bg-primary-50 dark:bg-primary-500/10 text-primary-700 dark:text-primary-400 font-semibold"
+                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/[0.05]",
+                    ]}
+                  >
+                    {item.badge && (
+                      <span
+                        class:list={[
+                          "w-6 h-6 flex-shrink-0 rounded-md text-[0.65rem] font-bold font-mono flex items-center justify-center transition-colors",
+                          isActive(item.href)
+                            ? "bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-400"
+                            : "bg-gray-100 dark:bg-white/[0.06] text-gray-500 dark:text-gray-500 group-hover:bg-gray-200 dark:group-hover:bg-white/10",
+                        ]}
+                      >
+                        {item.badge}
+                      </span>
+                    )}
+                    <span class="flex-1 truncate">{item.title}</span>
+                    {isActive(item.href) && (
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0" />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <a
+            href={`${base}${entry.href}`}
+            class:list={[
+              "flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-150",
+              isActive(entry.href)
+                ? "bg-primary-50 dark:bg-primary-500/10 text-primary-700 dark:text-primary-400 font-semibold"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/[0.05]",
+            ]}
+          >
+            {entry.icon && <span class="text-base">{entry.icon}</span>}
+            {entry.title}
+          </a>
+        ),
+      )
+    }
+  </nav>
+</aside>

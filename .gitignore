@@ -1,8 +1,15 @@
-# Custom
-docs/introduction.md
-
 # Azure Functions — local settings contain secrets, never commit
 local.settings.json
+
+# MkDocs generated site output — no longer used (replaced by Astro)
+site/
+
+# Astro build output
+dist/
+.astro/
+
+# Node.js
+node_modules/
 
 # Visual Studio Code
 .vscode/
