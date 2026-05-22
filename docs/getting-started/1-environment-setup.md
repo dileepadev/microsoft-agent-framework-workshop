@@ -131,4 +131,4 @@ uv pip list | grep agent-framework
 
 ## Next
 
-Continue to [2. GitHub Models Connection](./2-github-models-connection.md).
+Continue to [2. GitHub Models Connection](./2-github-models-connection).

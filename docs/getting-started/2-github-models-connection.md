@@ -249,4 +249,4 @@ For most workshop examples, `gpt-4o-mini` is a good default because it is fast a
 
 ## Next
 
-Continue to [3. Microsoft Agent Framework Agents](./3-microsoft-agent-framework-agents.md).
+Continue to [3. Microsoft Agent Framework Agents](./3-microsoft-agent-framework-agents).

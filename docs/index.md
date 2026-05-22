@@ -2,7 +2,7 @@
 
 Build production-ready AI agents from scratch using **Microsoft Agent Framework**, **GitHub Models**, and **MCP servers** — a hands-on, module-by-module workshop.
 
-[Start Workshop](getting-started/1-environment-setup.md) | [Explore OpsAgent](OpsAgent.md)
+[Start Workshop](getting-started/1-environment-setup) | [Explore OpsAgent](opsagent)
 
 ---
 
@@ -29,16 +29,16 @@ By the end, OpsAgent will be a fully hosted HTTP endpoint with:
 
 | # | Module | What You Build |
 |---|--------|---------------|
-| 1 | [Environment Setup](getting-started/1-environment-setup.md) | Python project, venv, dependencies |
-| 2 | [GitHub Models Connection](getting-started/2-github-models-connection.md) | LLM client via GitHub Models |
-| 3 | [Agent Framework Agents](getting-started/3-microsoft-agent-framework-agents.md) | First OpsAgent with instructions |
-| 4 | [Tool Calling](getting-started/4-tool-calling.md) | Azure health check & deployment tools |
-| 5 | [MCP Integration](getting-started/5-mcp-integration.md) | Microsoft Learn MCP server |
-| 6 | [Multi-Turn Conversations](getting-started/6-multi-turn-conversations.md) | Conversation history & memory |
-| 7 | [Memory & Persistence](getting-started/7-memory-and-persistence.md) | Persistent agent memory |
-| 8 | [Workflows](getting-started/8-workflows.md) | Multi-agent orchestration |
-| 9 | [Chat User Interface](getting-started/9-chat-user-interface.md) | Streamlit, Chainlit, FastAPI UIs |
-| 10 | [Host Agent](getting-started/10-host-agent.md) | Azure Functions HTTP endpoint |
+| 1 | [Environment Setup](getting-started/1-environment-setup) | Python project, venv, dependencies |
+| 2 | [GitHub Models Connection](getting-started/2-github-models-connection) | LLM client via GitHub Models |
+| 3 | [Agent Framework Agents](getting-started/3-microsoft-agent-framework-agents) | First OpsAgent with instructions |
+| 4 | [Tool Calling](getting-started/4-tool-calling) | Azure health check & deployment tools |
+| 5 | [MCP Integration](getting-started/5-mcp-integration) | Microsoft Learn MCP server |
+| 6 | [Multi-Turn Conversations](getting-started/6-multi-turn-conversations) | Conversation history & memory |
+| 7 | [Memory & Persistence](getting-started/7-memory-and-persistence) | Persistent agent memory |
+| 8 | [Workflows](getting-started/8-workflows) | Multi-agent orchestration |
+| 9 | [Chat User Interface](getting-started/9-chat-user-interface) | Streamlit, Chainlit, FastAPI UIs |
+| 10 | [Host Agent](getting-started/10-host-agent) | Azure Functions HTTP endpoint |
 
 ---
 

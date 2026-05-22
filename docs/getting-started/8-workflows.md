@@ -356,4 +356,4 @@ Type 'exit' to stop.
 
 ## Next
 
-Continue to [9. Chat User Interface](9-chat-user-interface.md)
+Continue to [9. Chat User Interface](9-chat-user-interface)

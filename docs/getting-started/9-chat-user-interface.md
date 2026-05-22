@@ -268,4 +268,4 @@ After completing this module you will have:
 
 ## Next
 
-Continue to [10. Host Agent](./10-host-agent.md).
+Continue to [10. Host Agent](./10-host-agent).

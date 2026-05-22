@@ -246,4 +246,4 @@ python test_multi_turn_conversations.py
 
 ## Next
 
-Continue to [7. Memory and Persistence](./7-memory-and-persistence.md).
+Continue to [7. Memory and Persistence](./7-memory-and-persistence).

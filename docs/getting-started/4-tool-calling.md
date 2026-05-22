@@ -526,4 +526,4 @@ uv run test_tool_calling.py
 
 ## Next
 
-Continue to [5. MCP Integration](./5-mcp-integration.md).
+Continue to [5. MCP Integration](./5-mcp-integration).

@@ -59,7 +59,7 @@ Each module has a corresponding test file in `lab/` so you can validate each ste
 
 ## Before You Start
 
-Head to [Module 1 — Environment Setup](getting-started/1-environment-setup.md) to configure your local development environment.
+Head to [Module 1 — Environment Setup](getting-started/1-environment-setup) to configure your local development environment.
 
 !!! tip "GitHub Token"
     You will need a GitHub Personal Access Token with **Models** permission enabled. Create one at [github.com/settings/tokens](https://github.com/settings/tokens).

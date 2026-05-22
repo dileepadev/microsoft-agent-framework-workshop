@@ -29,7 +29,7 @@ These two concepts are related but solve different problems:
 | **Mechanism** | `AgentSession` maintains a message buffer across `agent.run()` calls | `ContextProvider` stores facts in session state and injects them as instructions |
 | **Scope** | Conversation history (the back-and-forth messages) | User facts and preferences (name, preferences, context) |
 | **Example** | "What did I just ask you?" → agent recalls the earlier message | "What is my name?" → agent recalls the name you told it earlier |
-| **Module** | [Module 6](6-multi-turn-conversations.md) | This module |
+| **Module** | [Module 6](6-multi-turn-conversations) | This module |
 
 In practice, you use **both together**: a session keeps conversation history, and a context provider injects facts on top of it.
 
@@ -320,4 +320,4 @@ Type 'exit' to stop.
 
 ## Next
 
-Continue to [Module 8 - Workflows](8-workflows.md)
+Continue to [Module 8 - Workflows](8-workflows)
