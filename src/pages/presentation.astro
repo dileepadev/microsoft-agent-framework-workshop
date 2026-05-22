@@ -1,0 +1,3763 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+---
+
+<BaseLayout
+  title="Workshop Live Presentation"
+  description="Interactive and animated presentation deck for the Microsoft Agent Framework Workshop."
+>
+  <section class="presentation-shell px-4 py-8 sm:py-10">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-5 flex flex-wrap items-center gap-3">
+        <a href={`${base}/`} class="top-btn"> Back to Site </a>
+        <a
+          href={`${base}/getting-started/1-environment-setup`}
+          class="top-btn top-btn-primary"
+        >
+          Start Module 1
+        </a>
+        <button
+          id="overviewBtn"
+          type="button"
+          class="top-btn"
+          aria-pressed="false"
+        >
+          Overview
+        </button>
+        <button
+          id="fullscreenBtn"
+          type="button"
+          class="top-btn"
+          aria-pressed="false"
+        >
+          Fullscreen
+        </button>
+        <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
+          Controls: Left/Right, Space, Home/End, O, F
+        </p>
+      </div>
+
+      <div
+        class="deck-wrap relative overflow-hidden rounded-3xl border border-gray-200/80 bg-white/80 shadow-2xl shadow-primary-500/10 backdrop-blur-sm dark:border-white/10 dark:bg-[#0f1117]/90"
+      >
+        <!-- Constellation mouse tracker canvas -->
+        <canvas id="mouseCanvas" class="mouse-canvas" aria-hidden="true"
+        ></canvas>
+
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div
+            class="absolute -left-16 -top-16 h-72 w-72 rounded-full bg-primary-500/20 blur-3xl"
+          >
+          </div>
+          <div
+            class="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl"
+          >
+          </div>
+        </div>
+
+        <!-- Watermark -->
+        <div class="slide-watermark" aria-hidden="true">
+          <span class="watermark-title"
+            >Build AI Solutions with Microsoft Agent Framework</span
+          >
+          <span class="watermark-speaker">Dileepa Bandara</span>
+        </div>
+
+        <div class="slides-container relative flex-grow">
+          <!-- ═══════════ SLIDE 1: Welcome ═══════════ -->
+          <article class="slide is-active" data-title="Welcome" data-index="1">
+            <div class="slide1-layout">
+              <!-- Left: Workshop Info -->
+              <div class="slide1-left">
+                <p class="slide-kicker animate-fade-in">
+                  Microsoft Agent Framework Workshop
+                </p>
+                <h1 class="slide-title animate-slide-up">
+                  Build AI Solutions with<br />Microsoft Agent Framework
+                </h1>
+                <p
+                  class="slide-secondary-title text-lg font-bold text-primary-600 dark:text-cyan-400 animate-slide-up-delay"
+                >
+                  Production AI Agents: Theory to Live Deployment
+                </p>
+                <p class="pt-2 slide-text animate-fade-in-delay">
+                  A guided session that explains core concepts and then builds a
+                  practical agent end to end — from model connection to live
+                  deployment.
+                </p>
+                <div class="slide1-tags animate-fade-in-delay">
+                  <span>Theory</span>
+                  <span>Hands-on Labs</span>
+                  <span>Python</span>
+                  <span>Azure</span>
+                  <span>AI</span>
+                </div>
+              </div>
+              <!-- Right: Speaker Hero Card -->
+              <div class="slide1-right animate-fade-in-delay-2">
+                <div class="speaker-card-hero">
+                  <div class="speaker-hero-glow" aria-hidden="true"></div>
+                  <div class="speaker-hero-photo-wrap">
+                    <img
+                      src="https://dileepa.dev/profile.png"
+                      alt="Dileepa Bandara"
+                      loading="eager"
+                    />
+                  </div>
+                  <p class="speaker-name-hero">Dileepa Bandara</p>
+                  <p class="speaker-role-hero">Associate AI Engineer</p>
+                  <p class="speaker-org-hero">Random Software Ltd</p>
+                  <div class="speaker-links-hero">
+                    <a
+                      href="https://github.com/dileepadev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="speaker-pill-link"
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        ></path>
+                      </svg>
+                      GitHub
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/dileepadev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="speaker-pill-link"
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                        ></path>
+                      </svg>
+                      LinkedIn
+                    </a>
+                    <a
+                      href="https://dileepa.dev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="speaker-pill-link"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                        ></path>
+                      </svg>
+                      dileepa.dev
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 2: Agenda ═══════════ -->
+          <article class="slide" data-title="Agenda" data-index="2">
+            <p class="slide-kicker">Session Agenda</p>
+            <h2 class="slide-title">
+              A structured flow from theory to production deployment.
+            </h2>
+            <div class="agenda-layout mt-1">
+              <div class="agenda-section">
+                <h3 class="agenda-header">1. Core Theory</h3>
+                <ul class="agenda-list-simple">
+                  <li>
+                    <strong>What are Agents?</strong> — Core definitions and mechanisms
+                  </li>
+                  <li>
+                    <strong>What is Microsoft Agent Framework?</strong> — SDK architecture
+                    & capabilities
+                  </li>
+                  <li>
+                    <strong>Core Agent Loop</strong> — Cognitive reasoning patterns
+                    (Think-Act-Observe)
+                  </li>
+                  <li>
+                    <strong>Tool Calling & MCP</strong> — Exposing deterministic local/remote
+                    functions
+                  </li>
+                  <li>
+                    <strong>Memory & Workflows</strong> — Persistence layers and graph-based
+                    orchestration
+                  </li>
+                </ul>
+              </div>
+              <div class="agenda-section">
+                <h3 class="agenda-header">
+                  2. Practice & Delivery (Build Tracks)
+                </h3>
+                <ul class="agenda-list-simple">
+                  <li>
+                    <strong>Meet OpsAgent</strong> — The operations assistant we build
+                    together
+                  </li>
+                  <li>
+                    <strong>Track A: Foundations (M1-3)</strong> — Setup, GitHub Models
+                    & Core Agent
+                  </li>
+                  <li>
+                    <strong>Track B: Remote Tools (M4-5)</strong> — Local Tool Calling
+                    & hosted MCP
+                  </li>
+                  <li>
+                    <strong>Track C: Complex Pipelines (M6-8)</strong> — Sessions,
+                    Memory & Workflows
+                  </li>
+                  <li>
+                    <strong>Track D: Production (M9-10)</strong> — Chat interfaces
+                    & Azure Functions
+                  </li>
+                  <li>
+                    <strong>Reference Architecture & Pacing</strong> — Full system
+                    integration & demo pacing
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 3: What are Agents ═══════════ -->
+          <article class="slide" data-title="What are Agents" data-index="3">
+            <p class="slide-kicker">Theory 1</p>
+            <h2 class="slide-title">What are Agents?</h2>
+            <p class="slide-text">
+              An agent is an autonomous software component that uses an LLM as
+              its central reasoning engine to perceive its environment, make
+              decisions, call APIs, and iteratively reason toward completing
+              complex goals.
+            </p>
+            <!-- Agent Hub & Spokes Diagram -->
+            <div class="agent-hub-layout">
+              <div class="agent-hub-center">
+                <div class="agent-hub-ring" aria-hidden="true"></div>
+                <div class="agent-hub-core">
+                  <span style="font-size:2.6rem">🧠</span>
+                  <strong>LLM Core</strong>
+                  <span>Plan · Reason · Decide</span>
+                </div>
+              </div>
+              <div class="agent-hub-spokes">
+                <div class="agent-hub-spoke spoke-plan">
+                  <span class="hub-spoke-icon">📋</span>
+                  <strong>Planning</strong>
+                  <p>
+                    Decomposes complex goals into ordered, logical steps and
+                    iteratively refines strategy
+                  </p>
+                </div>
+                <div class="agent-hub-spoke spoke-tool">
+                  <span class="hub-spoke-icon">🛠️</span>
+                  <strong>Tools</strong>
+                  <p>
+                    Calls APIs, reads files, runs health checks, and executes
+                    Python functions on demand
+                  </p>
+                </div>
+                <div class="agent-hub-spoke spoke-mem">
+                  <span class="hub-spoke-icon">💾</span>
+                  <strong>Memory</strong>
+                  <p>
+                    Session history for context continuity and long-term
+                    persistent data via ContextProvider
+                  </p>
+                </div>
+                <div class="agent-hub-spoke spoke-obs">
+                  <span class="hub-spoke-icon">👁️</span>
+                  <strong>Perception</strong>
+                  <p>
+                    Observes environment, tool outputs, and external signals to
+                    adapt reasoning in real-time
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 4: What is Microsoft Agent Framework ═══════════ -->
+          <article
+            class="slide"
+            data-title="Microsoft Agent Framework"
+            data-index="4"
+          >
+            <p class="slide-kicker">Theory 2</p>
+            <h2 class="slide-title">What is Microsoft Agent Framework?</h2>
+            <div class="maf-explanation-layout mt-1">
+              <div class="maf-left-col">
+                <p class="maf-intro-text">
+                  An <strong>open-source framework for Python and .NET</strong>
+                  that helps teams build production-grade AI systems using autonomous
+                  agents and explicit workflows.
+                </p>
+                <ul class="maf-key-list mt-3">
+                  <li>
+                    <strong>Two Core Capabilities:</strong> Use
+                    <strong>Agents</strong> for conversational and tool-driven tasks,
+                    or <strong>Workflows</strong> for deterministic multi-step orchestration.
+                  </li>
+                  <li>
+                    <strong>Foundational Building Blocks:</strong> Model clients,
+                    agent sessions, context providers, middleware, and MCP clients
+                    for robust, stateful runtime behavior.
+                  </li>
+                  <li>
+                    <strong>Next-Generation Platform:</strong> Combines AutoGen's
+                    simple abstractions with Semantic Kernel's enterprise features
+                    such as type safety, telemetry, and human-in-the-loop support.
+                  </li>
+                </ul>
+              </div>
+              <div class="maf-feature-grid-two">
+                <div class="maf-feature-card-compact">
+                  <div class="maf-card-title">
+                    <span>🤖</span>
+                    <span>Agents</span>
+                  </div>
+                  <p class="maf-card-desc">
+                    LLM-driven units that reason, call tools and MCP servers,
+                    and produce responses with autonomous planning.
+                  </p>
+                </div>
+                <div class="maf-feature-card-compact">
+                  <div class="maf-card-title">
+                    <span>🧭</span>
+                    <span>Workflows</span>
+                  </div>
+                  <p class="maf-card-desc">
+                    Graph-based execution for type-safe routing, checkpointing,
+                    and coordinated multi-agent or function pipelines.
+                  </p>
+                </div>
+                <div class="maf-feature-card-compact">
+                  <div class="maf-card-title">
+                    <span>🧱</span>
+                    <span>Core Runtime</span>
+                  </div>
+                  <p class="maf-card-desc">
+                    Sessions, memory context providers, middleware, and MCP
+                    clients provide safe, stateful, extensible foundations.
+                  </p>
+                </div>
+                <div class="maf-feature-card-compact">
+                  <div class="maf-card-title">
+                    <span>🚀</span>
+                    <span>Why It Matters</span>
+                  </div>
+                  <p class="maf-card-desc">
+                    Direct successor to Semantic Kernel + AutoGen with stronger
+                    enterprise controls and explicit orchestration patterns.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 5: Core Agent Loop ═══════════ -->
+          <article class="slide" data-title="Core Agent Loop" data-index="5">
+            <p class="slide-kicker">Theory 3</p>
+            <h2 class="slide-title">
+              Core Agent Loop: Think → Act → Observe → Respond
+            </h2>
+            <p class="slide-text">
+              Agents run a continuous execution loop. Each cycle processes
+              inputs, selects actions, captures results, and decides whether to
+              respond or continue reasoning.
+            </p>
+            <!-- Animated Loop Diagram -->
+            <div class="loop-diagram">
+              <div class="loop-node loop-think">
+                <div class="loop-node-num">1</div>
+                <div class="loop-node-icon">🧠</div>
+                <div class="loop-node-label">Think</div>
+                <div class="loop-node-desc">
+                  Analyze context, reason about next step
+                </div>
+              </div>
+              <div class="loop-connector">
+                <svg viewBox="0 0 60 20" class="loop-arrow-svg"
+                  ><path
+                    d="M5 10 L45 10"
+                    stroke="url(#arrowGrad)"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke-linecap="round"></path><polygon
+                    points="45,5 55,10 45,15"
+                    fill="url(#arrowGrad)"></polygon><defs
+                    ><linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0"
+                      ><stop offset="0%" stop-color="#6366f1"></stop><stop
+                        offset="100%"
+                        stop-color="#06b6d4"></stop></linearGradient
+                    ></defs
+                  ></svg
+                >
+              </div>
+              <div class="loop-node loop-act">
+                <div class="loop-node-num">2</div>
+                <div class="loop-node-icon">⚡</div>
+                <div class="loop-node-label">Act</div>
+                <div class="loop-node-desc">
+                  Call tool, invoke API, or query MCP
+                </div>
+              </div>
+              <div class="loop-connector">
+                <svg viewBox="0 0 60 20" class="loop-arrow-svg"
+                  ><path
+                    d="M5 10 L45 10"
+                    stroke="url(#arrowGrad2)"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke-linecap="round"></path><polygon
+                    points="45,5 55,10 45,15"
+                    fill="url(#arrowGrad2)"></polygon><defs
+                    ><linearGradient id="arrowGrad2" x1="0" y1="0" x2="1" y2="0"
+                      ><stop offset="0%" stop-color="#06b6d4"></stop><stop
+                        offset="100%"
+                        stop-color="#10b981"></stop></linearGradient
+                    ></defs
+                  ></svg
+                >
+              </div>
+              <div class="loop-node loop-observe">
+                <div class="loop-node-num">3</div>
+                <div class="loop-node-icon">👁️</div>
+                <div class="loop-node-label">Observe</div>
+                <div class="loop-node-desc">
+                  Capture output, evaluate results
+                </div>
+              </div>
+              <div class="loop-connector">
+                <svg viewBox="0 0 60 20" class="loop-arrow-svg"
+                  ><path
+                    d="M5 10 L45 10"
+                    stroke="url(#arrowGrad3)"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke-linecap="round"></path><polygon
+                    points="45,5 55,10 45,15"
+                    fill="url(#arrowGrad3)"></polygon><defs
+                    ><linearGradient id="arrowGrad3" x1="0" y1="0" x2="1" y2="0"
+                      ><stop offset="0%" stop-color="#10b981"></stop><stop
+                        offset="100%"
+                        stop-color="#8b5cf6"></stop></linearGradient
+                    ></defs
+                  ></svg
+                >
+              </div>
+              <div class="loop-node loop-respond">
+                <div class="loop-node-num">4</div>
+                <div class="loop-node-icon">💬</div>
+                <div class="loop-node-label">Respond</div>
+                <div class="loop-node-desc">
+                  Output answer or loop back to Think
+                </div>
+              </div>
+            </div>
+            <div class="loop-return-arrow" aria-hidden="true">
+              <svg
+                viewBox="0 0 800 40"
+                preserveAspectRatio="none"
+                class="w-full h-8"
+                ><path
+                  d="M750 5 Q780 5 780 20 Q780 35 750 35 L50 35 Q20 35 20 20 Q20 5 50 5"
+                  stroke="rgba(139,92,246,0.3)"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-dasharray="6,4"></path><polygon
+                  points="55,0 40,5 55,10"
+                  fill="rgba(139,92,246,0.4)"></polygon></svg
+              >
+              <span class="loop-return-label">Repeat until goal achieved</span>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 6: Tool Calling ═══════════ -->
+          <article class="slide" data-title="Tool Calling" data-index="6">
+            <p class="slide-kicker">Theory 4</p>
+            <h2 class="slide-title">Exposing Tools for Actionable AI</h2>
+            <p class="slide-text">
+              Tool calling converts static text generation into deterministic
+              Python execution. Register functions using <code>@tool</code> and the
+              SDK auto-generates JSON schemas for the LLM.
+            </p>
+            <!-- Tool Call Sequence Flow -->
+            <div class="tc-flow mt-3">
+              <div class="tc-step tc-step-user">
+                <div class="tc-icon">👤</div>
+                <div class="tc-label">User Query</div>
+                <div class="tc-sub">"Check server health"</div>
+              </div>
+              <div class="tc-arrow">→</div>
+              <div class="tc-step tc-step-agent">
+                <div class="tc-icon">🤖</div>
+                <div class="tc-label">OpsAgent</div>
+                <div class="tc-sub">
+                  Sends chat history + tool schemas to LLM
+                </div>
+              </div>
+              <div class="tc-arrow">→</div>
+              <div class="tc-step tc-step-llm">
+                <div class="tc-icon">🧠</div>
+                <div class="tc-label">LLM Decides</div>
+                <div class="tc-sub">
+                  Returns <code>tool_call</code> JSON with arguments
+                </div>
+              </div>
+              <div class="tc-arrow">→</div>
+              <div class="tc-step tc-step-tool">
+                <div class="tc-icon">🔧</div>
+                <div class="tc-label">@tool Function</div>
+                <div class="tc-sub">
+                  Executes <code>check_health("api-01")</code>
+                </div>
+              </div>
+              <div class="tc-arrow">→</div>
+              <div class="tc-step tc-step-output">
+                <div class="tc-icon">✅</div>
+                <div class="tc-label">Grounded Answer</div>
+                <div class="tc-sub">
+                  Verified, deterministic result returned to user
+                </div>
+              </div>
+            </div>
+            <div class="code-chip mt-2">
+              @tool(approval_mode="never_require")
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 7: MCP ═══════════ -->
+          <article
+            class="slide"
+            data-title="Model Context Protocol"
+            data-index="7"
+          >
+            <p class="slide-kicker">Theory 5</p>
+            <h2 class="slide-title">What is MCP (Model Context Protocol)?</h2>
+            <p class="slide-text">
+              An open standard that decouples agent hosts from tool
+              integrations. Instead of custom bindings, MCP servers publish
+              resources, tools, and prompts over JSON-RPC.
+            </p>
+            <!-- MCP Architecture Diagram -->
+            <div class="mcp-diagram">
+              <div class="mcp-col mcp-col-left">
+                <div class="mcp-box mcp-host">
+                  <div class="mcp-box-icon">🖥️</div>
+                  <div class="mcp-box-title">Agent Host</div>
+                  <div class="mcp-box-desc">OpsAgent + Framework SDK</div>
+                </div>
+              </div>
+              <div class="mcp-col mcp-col-center">
+                <div class="mcp-bridge">
+                  <div class="mcp-bridge-line"></div>
+                  <div class="mcp-bridge-label">
+                    <span class="mcp-bridge-icon">🔄</span>
+                    <span>JSON-RPC<br />Protocol</span>
+                  </div>
+                  <div class="mcp-bridge-line"></div>
+                </div>
+                <div class="mcp-capabilities">
+                  <span class="mcp-cap">📄 Resources</span>
+                  <span class="mcp-cap">🔧 Tools</span>
+                  <span class="mcp-cap">💬 Prompts</span>
+                </div>
+              </div>
+              <div class="mcp-col mcp-col-right">
+                <div class="mcp-box mcp-server">
+                  <div class="mcp-box-icon">⚙️</div>
+                  <div class="mcp-box-title">MCP Server</div>
+                  <div class="mcp-box-desc">Microsoft Learn Docs</div>
+                </div>
+                <div class="mcp-box mcp-server mcp-server-2">
+                  <div class="mcp-box-icon">🗄️</div>
+                  <div class="mcp-box-title">MCP Server</div>
+                  <div class="mcp-box-desc">SQLite / Filesystem</div>
+                </div>
+              </div>
+            </div>
+            <div class="code-chip mt-2">
+              MCPStreamableHTTPTool(url="https://learn.microsoft.com/api/mcp")
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 8: Memory ═══════════ -->
+          <article
+            class="slide"
+            data-title="Memory & Persistence"
+            data-index="8"
+          >
+            <p class="slide-kicker">Theory 6</p>
+            <h2 class="slide-title">Memory: Session vs Persistence</h2>
+            <p class="slide-text">
+              Production agents require proper state management. The framework
+              provides dual memory layers for human-like conversational
+              continuity.
+            </p>
+            <!-- Memory Comparison -->
+            <div class="memory-compare">
+              <div class="memory-card memory-session">
+                <div class="memory-card-header">
+                  <span class="memory-icon">⚡</span>
+                  <h4>Session Memory</h4>
+                </div>
+                <ul class="memory-list">
+                  <li>Chat history within a single run</li>
+                  <li>Context window messages cached</li>
+                  <li>Uses <code>AgentSession</code></li>
+                  <li>Resets when session ends</li>
+                </ul>
+                <div class="memory-lifetime">
+                  Lifetime: <strong>Single session</strong>
+                </div>
+              </div>
+              <div class="memory-vs">VS</div>
+              <div class="memory-card memory-persistent">
+                <div class="memory-card-header">
+                  <span class="memory-icon">💾</span>
+                  <h4>Persistent Memory</h4>
+                </div>
+                <ul class="memory-list">
+                  <li>Knowledge across separate visits</li>
+                  <li>User facts & configuration saved</li>
+                  <li>Uses <code>ContextProvider</code> hooks</li>
+                  <li>SQLite, Cosmos DB, or file stores</li>
+                </ul>
+                <div class="memory-lifetime">
+                  Lifetime: <strong>Across sessions</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Memory Flow Diagram -->
+            <div class="memory-flow-diagram mt-1">
+              <div class="mflow-node">
+                <span class="mflow-icon">💬</span>
+                <strong>User Input</strong>
+                <span>New prompt query</span>
+              </div>
+              <div class="mflow-arrow">➡️</div>
+              <div class="mflow-node mflow-node-session">
+                <span class="mflow-icon">🧠</span>
+                <strong>AgentSession</strong>
+                <span>In-memory chat history</span>
+              </div>
+              <div class="mflow-arrow">➡️</div>
+              <div class="mflow-node mflow-node-context">
+                <span class="mflow-icon">🔌</span>
+                <strong>ContextProvider</strong>
+                <span>Fact injector / logic hooks</span>
+              </div>
+              <div class="mflow-arrow">➡️</div>
+              <div class="mflow-node mflow-node-db">
+                <span class="mflow-icon">🗄️</span>
+                <strong>Persistent DB</strong>
+                <span>SQLite / Cosmos DB store</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 9: Workflows ═══════════ -->
+          <article
+            class="slide"
+            data-title="Workflows & Orchestration"
+            data-index="9"
+          >
+            <p class="slide-kicker">Theory 7</p>
+            <h2 class="slide-title">Orchestrating Complex Agent Workflows</h2>
+            <p class="slide-text">
+              For multi-step operational pipelines, workflows structure
+              execution as directed graphs using <code>@executor</code> decorators
+              and <code>WorkflowBuilder</code>.
+            </p>
+            <!-- Workflow Pipeline Diagram -->
+            <div class="workflow-pipeline">
+              <div class="wf-node wf-triage">
+                <div class="wf-node-icon">🔍</div>
+                <div class="wf-node-title">Triage Input</div>
+                <div class="wf-node-type">Python @executor</div>
+                <div class="wf-node-desc">
+                  Tags severity: CRITICAL / HIGH / INFO
+                </div>
+              </div>
+              <div class="wf-edge">
+                <svg viewBox="0 0 80 20"
+                  ><path
+                    d="M5 10 L65 10"
+                    stroke="url(#wfGrad)"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-linecap="round"></path><polygon
+                    points="65,5 75,10 65,15"
+                    fill="url(#wfGrad)"></polygon><defs
+                    ><linearGradient id="wfGrad" x1="0" y1="0" x2="1" y2="0"
+                      ><stop offset="0%" stop-color="#f43f5e"></stop><stop
+                        offset="100%"
+                        stop-color="#6366f1"></stop></linearGradient
+                    ></defs
+                  ></svg
+                >
+              </div>
+              <div class="wf-node wf-agent">
+                <div class="wf-node-icon">🤖</div>
+                <div class="wf-node-title">OpsAgent</div>
+                <div class="wf-node-type">LLM Agent</div>
+                <div class="wf-node-desc">Generates resolution steps</div>
+              </div>
+              <div class="wf-edge">
+                <svg viewBox="0 0 80 20"
+                  ><path
+                    d="M5 10 L65 10"
+                    stroke="url(#wfGrad2)"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-linecap="round"></path><polygon
+                    points="65,5 75,10 65,15"
+                    fill="url(#wfGrad2)"></polygon><defs
+                    ><linearGradient id="wfGrad2" x1="0" y1="0" x2="1" y2="0"
+                      ><stop offset="0%" stop-color="#6366f1"></stop><stop
+                        offset="100%"
+                        stop-color="#10b981"></stop></linearGradient
+                    ></defs
+                  ></svg
+                >
+              </div>
+              <div class="wf-node wf-capture">
+                <div class="wf-node-icon">📤</div>
+                <div class="wf-node-title">Capture Output</div>
+                <div class="wf-node-type">Python @executor</div>
+                <div class="wf-node-desc">Extracts & yields final result</div>
+              </div>
+            </div>
+            <div class="code-chip mt-2">
+              WorkflowBuilder(start_executor=triage_input,
+              output_from=[capture_output])
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 10: OpsAgent ═══════════ -->
+          <article
+            class="slide"
+            data-title="The Hands-on Lab: OpsAgent"
+            data-index="10"
+          >
+            <p class="slide-kicker">Practical Goal</p>
+            <h2 class="slide-title">What we are building: OpsAgent</h2>
+            <p class="slide-text">
+              OpsAgent is an AI-powered operations & engineering assistant. It
+              helps developers troubleshoot issues, retrieve documentation via
+              MCP, analyze systems, and automate workflows — all grounded in
+              real data.
+            </p>
+            <!-- OpsAgent capabilities diagram -->
+            <div class="ops-capabilities">
+              <div class="ops-cap-card">
+                <span class="ops-cap-icon">🩺</span>
+                <h4>Diagnose</h4>
+                <p>Error codes, service health, log analysis</p>
+              </div>
+              <div class="ops-cap-card">
+                <span class="ops-cap-icon">📚</span>
+                <h4>Retrieve</h4>
+                <p>Microsoft Learn docs via MCP server</p>
+              </div>
+              <div class="ops-cap-card">
+                <span class="ops-cap-icon">🔄</span>
+                <h4>Orchestrate</h4>
+                <p>Multi-step workflow pipelines</p>
+              </div>
+              <div class="ops-cap-card">
+                <span class="ops-cap-icon">💬</span>
+                <h4>Converse</h4>
+                <p>Multi-turn memory & persistent state</p>
+              </div>
+            </div>
+            <div class="slide-tags">
+              <span>Python 3.12</span><span>GitHub Models</span><span
+                >Custom Tools</span
+              ><span>Microsoft Learn MCP</span><span>Workflows</span><span
+                >Azure Functions</span
+              >
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 11: Build Track A ═══════════ -->
+          <article
+            class="slide"
+            data-title="Modules 1–3: Foundations"
+            data-index="11"
+          >
+            <p class="slide-kicker">Build Track A</p>
+            <h2 class="slide-title">Modules 1–3: Foundations & Core Agent</h2>
+            <p class="slide-text">
+              Establish a modern Python environment, connect to cloud-hosted
+              LLMs, and define your first OpsAgent.
+            </p>
+            <div class="module-track">
+              <div class="module-card">
+                <div class="module-num">M1</div>
+                <div class="module-info">
+                  <strong>Environment Setup</strong>
+                  <span
+                    >Install <code>uv</code>, configure Python 3.12, install
+                    dependencies</span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M2</div>
+                <div class="module-info">
+                  <strong>GitHub Models Connection</strong>
+                  <span
+                    >Obtain PAT tokens, configure inference endpoints, test
+                    OpenAI client</span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M3</div>
+                <div class="module-info">
+                  <strong>Core OpsAgent Definition</strong>
+                  <span
+                    >Define <code>Agent</code> with instructions, run streaming &
+                    non-streaming</span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 12: Build Track B ═══════════ -->
+          <article
+            class="slide"
+            data-title="Modules 4–5: Tools & MCP"
+            data-index="12"
+          >
+            <p class="slide-kicker">Build Track B</p>
+            <h2 class="slide-title">
+              Modules 4–5: Grounding with Tools and MCP
+            </h2>
+            <p class="slide-text">
+              Transform OpsAgent from chat-only to a functional operations
+              worker with tool calling and live documentation retrieval.
+            </p>
+            <div class="module-track">
+              <div class="module-card">
+                <div class="module-num">M4</div>
+                <div class="module-info">
+                  <strong>Tool Calling</strong>
+                  <span
+                    >Define <code>@tool</code> functions: health checks, deployment
+                    checklists, error diagnosis</span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M5</div>
+                <div class="module-info">
+                  <strong>MCP Integration</strong>
+                  <span
+                    >Connect <code>MCPStreamableHTTPTool</code> to Microsoft Learn
+                    MCP server</span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 13: Build Track C ═══════════ -->
+          <article
+            class="slide"
+            data-title="Modules 6–8: Memory & Workflows"
+            data-index="13"
+          >
+            <p class="slide-kicker">Build Track C</p>
+            <h2 class="slide-title">
+              Modules 6–8: Sessions, Memory & Orchestration
+            </h2>
+            <p class="slide-text">
+              Add state management layers for multi-turn chats, persistent
+              memory, and structured workflow graphs.
+            </p>
+            <div class="module-track">
+              <div class="module-card">
+                <div class="module-num">M6</div>
+                <div class="module-info">
+                  <strong>Multi-Turn Conversations</strong>
+                  <span
+                    >Enable history tracking with <code
+                      >InMemoryHistoryProvider</code
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M7</div>
+                <div class="module-info">
+                  <strong>Persistent Memory</strong>
+                  <span
+                    >Database-backed persistence: SQLite / Cosmos DB stores</span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M8</div>
+                <div class="module-info">
+                  <strong>Workflow Graphs</strong>
+                  <span
+                    >Wire <code>@executor</code> nodes into <code
+                      >WorkflowBuilder</code
+                    > pipelines</span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 14: Build Track D ═══════════ -->
+          <article
+            class="slide"
+            data-title="Modules 9–10: UI & Deployment"
+            data-index="14"
+          >
+            <p class="slide-kicker">Build Track D</p>
+            <h2 class="slide-title">
+              Modules 9–10: Web Interfaces & Production Hosting
+            </h2>
+            <p class="slide-text">
+              Build beautiful frontends and deploy the backend to scalable cloud
+              endpoints.
+            </p>
+            <div class="module-track">
+              <div class="module-card">
+                <div class="module-num">M9</div>
+                <div class="module-info">
+                  <strong>Chat User Interface</strong>
+                  <span
+                    >Streamlit, Chainlit, and FastAPI chat interfaces with
+                    streaming</span
+                  >
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-num">M10</div>
+                <div class="module-info">
+                  <strong>Host Agent on Azure</strong>
+                  <span
+                    >Deploy as Azure Functions HTTP endpoint with <code
+                      >AgentFunctionApp</code
+                    ></span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 15: Reference Architecture ═══════════ -->
+          <article
+            class="slide"
+            data-title="Reference Architecture"
+            data-index="15"
+          >
+            <p class="slide-kicker">Reference Architecture</p>
+            <h2 class="slide-title">OpsAgent Full System Architecture</h2>
+            <p class="slide-text">
+              The complete architecture connects UI layers, orchestration, the
+              agent SDK, tool integrations, and cloud resources.
+            </p>
+            <!-- Architecture stack diagram -->
+            <div class="arch-stack">
+              <div class="arch-layer arch-layer-1">
+                <div class="arch-layer-badge">Layer 1</div>
+                <strong>UI Layer</strong>
+                <span>Chainlit · Streamlit · FastAPI · REST API</span>
+              </div>
+              <div class="arch-layer-connector"></div>
+              <div class="arch-layer arch-layer-2">
+                <div class="arch-layer-badge">Layer 2</div>
+                <strong>Orchestration</strong>
+                <span>WorkflowBuilder · Triage · Routing · Pipelines</span>
+              </div>
+              <div class="arch-layer-connector"></div>
+              <div class="arch-layer arch-layer-3">
+                <div class="arch-layer-badge">Layer 3</div>
+                <strong>Agent Framework Core</strong>
+                <span>Agent · AgentSession · Memory · ContextProviders</span>
+              </div>
+              <div class="arch-layer-connector"></div>
+              <div class="arch-layer-split">
+                <div class="arch-layer arch-layer-4">
+                  <div class="arch-layer-badge">Layer 4</div>
+                  <strong>Tools</strong>
+                  <span>@tool · Health · Deploy · Diagnose</span>
+                </div>
+                <div class="arch-layer arch-layer-5">
+                  <div class="arch-layer-badge">Layer 5</div>
+                  <strong>MCP Protocol</strong>
+                  <span>Microsoft Learn · Remote APIs</span>
+                </div>
+              </div>
+              <div class="arch-layer-connector"></div>
+              <div class="arch-layer arch-layer-6">
+                <div class="arch-layer-badge">Layer 6</div>
+                <strong>LLM & Hosting</strong>
+                <span>GitHub Models (GPT-4o-mini) · Azure Functions</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 16: Demo Pacing ═══════════ -->
+          <article class="slide" data-title="Demo Pacing Flow" data-index="16">
+            <p class="slide-kicker">Presenter Flow</p>
+            <h2 class="slide-title">Suggested live demo pacing (60 min)</h2>
+            <p class="slide-text">
+              Divide time between theory foundations, building blocks, and
+              deployment steps for maximum engagement.
+            </p>
+            <div class="timeline-flow">
+              <div class="timeline-block tb-theory">
+                <div class="timeline-time">00–10 min</div>
+                <div class="timeline-label">Agent & MCP Theory Overview</div>
+              </div>
+              <div class="timeline-block tb-setup">
+                <div class="timeline-time">10–20 min</div>
+                <div class="timeline-label">Environment & Model Connection</div>
+              </div>
+              <div class="timeline-block tb-tools">
+                <div class="timeline-time">20–30 min</div>
+                <div class="timeline-label">Custom Tools & MCP Search</div>
+              </div>
+              <div class="timeline-block tb-memory">
+                <div class="timeline-time">30–40 min</div>
+                <div class="timeline-label">Memory & Session State</div>
+              </div>
+              <div class="timeline-block tb-wf">
+                <div class="timeline-time">40–50 min</div>
+                <div class="timeline-label">Workflow Graphs & Web UI</div>
+              </div>
+              <div class="timeline-block tb-deploy">
+                <div class="timeline-time">50–60 min</div>
+                <div class="timeline-label">Azure Functions Deployment</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ═══════════ SLIDE 17: Wrap-up ═══════════ -->
+          <article
+            class="slide"
+            data-title="Wrap-up & Resources"
+            data-index="17"
+          >
+            <p class="slide-kicker">Workshop Complete</p>
+            <h2 class="slide-title">Let's build production-grade AI agents.</h2>
+            <p class="slide-text">
+              The workshop repository is fully open. Pull the code, follow the
+              guides, and start building!
+            </p>
+            <div class="resources-grid">
+              <a
+                href="https://learn.microsoft.com/agent-framework"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resource-card"
+              >
+                <span class="resource-icon">📖</span>
+                <strong>Microsoft Learn</strong>
+                <span>Official Agent Framework docs & tutorials</span>
+              </a>
+              <a
+                href="https://github.com/microsoft/agent-framework"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resource-card"
+              >
+                <span class="resource-icon">💻</span>
+                <strong>GitHub Repo</strong>
+                <span>Source code, samples & advanced patterns</span>
+              </a>
+              <a
+                href="https://modelcontextprotocol.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resource-card"
+              >
+                <span class="resource-icon">🔌</span>
+                <strong>MCP Servers</strong>
+                <span>Browse & connect additional MCP servers</span>
+              </a>
+              <a
+                href="https://github.com/marketplace/models"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resource-card"
+              >
+                <span class="resource-icon">🤖</span>
+                <strong>GitHub Models</strong>
+                <span>Free LLM inference for development</span>
+              </a>
+            </div>
+            <div class="slide-tags mt-3">
+              <span>Code Ready</span><span>Open Source</span><span
+                >Thank You! 🎉</span
+              >
+            </div>
+          </article>
+        </div>
+
+        <div
+          class="relative z-20 border-t border-gray-200/80 px-4 py-3 dark:border-white/10 sm:px-6"
+        >
+          <div
+            class="mb-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
+          >
+            <span id="slideLabel">1 / 17</span>
+            <span id="slideTitle">Welcome</span>
+          </div>
+          <div
+            class="h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-white/10"
+          >
+            <div
+              id="progressBar"
+              class="h-full w-0 rounded-full bg-gradient-to-r from-primary-500 to-cyan-500 transition-all duration-500"
+            >
+            </div>
+          </div>
+          <div class="mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-3">
+            <button id="prevBtn" type="button" class="nav-btn">Previous</button>
+            <div
+              id="slideDots"
+              class="slide-dots"
+              aria-label="Slide navigation"
+            >
+            </div>
+            <button id="nextBtn" type="button" class="nav-btn nav-btn-primary"
+              >Next</button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .presentation-shell {
+      min-height: calc(100vh - 9rem);
+    }
+
+    .top-btn {
+      border-radius: 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.82);
+      color: rgb(55 65 81);
+      padding: 0.42rem 0.74rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .top-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(99, 102, 241, 0.45);
+      color: rgb(79 70 229);
+    }
+
+    .top-btn-primary {
+      border-color: rgba(99, 102, 241, 0.35);
+      background: rgba(99, 102, 241, 0.12);
+      color: rgb(67 56 202);
+    }
+
+    :global(.dark) .top-btn {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgb(229 231 235);
+    }
+
+    :global(.dark) .top-btn-primary {
+      border-color: rgba(129, 140, 248, 0.5);
+      background: rgba(99, 102, 241, 0.2);
+      color: rgb(199 210 254);
+    }
+
+    /* ── Mouse Canvas ── */
+    .mouse-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .deck-wrap:hover .mouse-canvas {
+      opacity: 1;
+    }
+
+    /* ── Watermark ── */
+    .slide-watermark {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.8rem;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.15rem;
+      pointer-events: none;
+      opacity: 0.18;
+      transition: opacity 0.3s ease;
+    }
+    .watermark-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgb(99 102 241); /* indigo */
+    }
+    .watermark-speaker {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: rgb(6 182 212); /* cyan */
+    }
+    :global(.dark) .watermark-title {
+      color: rgb(165 180 252);
+    }
+    :global(.dark) .watermark-speaker {
+      color: rgb(103 232 249);
+    }
+
+    .deck-wrap {
+      display: flex;
+      flex-direction: column;
+      height: clamp(620px, 80vh, 900px);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .slides-container {
+      position: relative;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .deck-wrap.is-overview {
+      height: auto;
+      overflow-y: visible;
+    }
+
+    .deck-wrap.is-overview .slides-container {
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
+      height: auto;
+      gap: 2rem;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(1.5rem, 3.5vw, 3.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateX(24px) scale(0.98);
+      pointer-events: none;
+      transition:
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2;
+      overflow-y: auto;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .slide-kicker {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgb(14 116 144);
+      margin-bottom: 0.15rem;
+    }
+
+    .slide-title {
+      font-size: clamp(1.85rem, 3.8vw, 3.25rem);
+      line-height: 1.12;
+      font-weight: 800;
+      color: rgb(17 24 39);
+      max-width: 28ch;
+      margin-bottom: 0.35rem;
+    }
+
+    .slide:first-of-type .slide-title {
+      font-size: clamp(2.9rem, 3.6vw, 2rem);
+      max-width: 30ch;
+    }
+
+    .slide-text {
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      line-height: 1.6;
+      color: rgb(75 85 99);
+      max-width: 76ch;
+    }
+
+    .slide[data-index="5"] .slide-text {
+      padding-bottom: 3rem;
+    }
+
+    .slide[data-index="10"] .slide-text {
+      padding-bottom: 3rem;
+    }
+
+    .slide-list {
+      margin: 0;
+      padding-left: 1.5rem;
+      display: grid;
+      gap: 0.6rem;
+      color: rgb(55 65 81);
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      line-height: 1.6;
+    }
+
+    .agenda-list-simple {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.5rem;
+      color: rgb(55 65 81);
+      font-size: 1.2rem;
+      line-height: 1.8;
+      list-style-type: disc;
+      flex: 1;
+      align-content: start;
+    }
+
+    .agenda-list-simple strong {
+      color: rgb(79 70 229);
+    }
+
+    :global(.dark) .agenda-list-simple {
+      color: rgb(209 213 219);
+    }
+
+    :global(.dark) .agenda-list-simple strong {
+      color: rgb(165 180 252);
+    }
+
+    .slide-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+
+    .slide-tags span {
+      border: 1px solid rgb(165 243 252);
+      background: rgb(236 254 255);
+      color: rgb(21 94 117);
+      padding: 0.3rem 0.58rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+    .slide-tags span:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px -4px rgba(6, 182, 212, 0.3);
+    }
+
+    .speaker-card {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      width: fit-content;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 0.8rem 1.1rem;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+    .speaker-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -8px rgba(99, 102, 241, 0.12);
+    }
+
+    .speaker-card img {
+      width: 68px;
+      height: 68px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(99, 102, 241, 0.35);
+    }
+
+    .speaker-name {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+
+    .speaker-role {
+      margin: 0.1rem 0 0.3rem;
+      font-size: 0.88rem;
+      color: rgb(75 85 99);
+    }
+
+    .speaker-links {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.3rem;
+    }
+
+    .speaker-link {
+      font-size: 0.85rem;
+      color: rgb(37 99 235);
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.2s ease;
+    }
+
+    :global(.dark) .speaker-link {
+      color: rgb(96 165 250);
+    }
+
+    .speaker-link:hover {
+      text-decoration: underline;
+      color: rgb(29 78 216);
+    }
+
+    :global(.dark) .speaker-link:hover {
+      color: rgb(147 197 253);
+    }
+
+    .link-divider {
+      color: rgb(156 163 175);
+      font-size: 0.8rem;
+    }
+
+    /* ══════════ SLIDE 1 – TWO-COLUMN HERO LAYOUT ══════════ */
+    .slide1-layout {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      align-items: stretch;
+      gap: 0;
+      flex: 1;
+      width: 100%;
+    }
+    .slide1-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.9rem;
+      padding-right: 3rem;
+    }
+    .slide1-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .slide1-tags span {
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      background: rgba(99, 102, 241, 0.08);
+      color: rgb(79 70 229);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    :global(.dark) .slide1-tags span {
+      border-color: rgba(129, 140, 248, 0.35);
+      background: rgba(99, 102, 241, 0.15);
+      color: rgb(165 180 252);
+    }
+    .slide1-right {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding-left: 3rem;
+      border-left: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    :global(.dark) .slide1-right {
+      border-left-color: rgba(255, 255, 255, 0.08);
+    }
+    .speaker-card-hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      padding: 2.2rem 2rem;
+      border: 1px solid rgba(99, 102, 241, 0.28);
+      border-radius: 1.75rem;
+      background: rgba(255, 255, 255, 0.82);
+      text-align: center;
+      overflow: hidden;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 280px;
+    }
+    .speaker-card-hero:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px -12px rgba(99, 102, 241, 0.2);
+    }
+    :global(.dark) .speaker-card-hero {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(129, 140, 248, 0.25);
+    }
+    .speaker-hero-glow {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.18),
+        transparent 65%
+      );
+      pointer-events: none;
+    }
+    .speaker-hero-photo-wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .speaker-hero-photo-wrap img {
+      width: 170px;
+      height: 170px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 4px solid rgba(99, 102, 241, 0.55);
+      box-shadow:
+        0 0 0 8px rgba(99, 102, 241, 0.1),
+        0 12px 32px -6px rgba(99, 102, 241, 0.35);
+      display: block;
+    }
+    .speaker-name-hero {
+      margin: 0.4rem 0 0;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+      position: relative;
+      z-index: 1;
+    }
+    :global(.dark) .speaker-name-hero {
+      color: rgb(243 244 246);
+    }
+    .speaker-role-hero {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgb(79 70 229);
+      position: relative;
+      z-index: 1;
+    }
+    :global(.dark) .speaker-role-hero {
+      color: rgb(165 180 252);
+    }
+    .speaker-org-hero {
+      margin: 0;
+      font-size: 0.88rem;
+      color: rgb(107 114 128);
+      position: relative;
+      z-index: 1;
+    }
+    :global(.dark) .speaker-org-hero {
+      color: rgb(156 163 175);
+    }
+    .speaker-links-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .speaker-pill-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(248, 250, 252, 0.8);
+      color: rgb(55 65 81);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .speaker-pill-link svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .speaker-pill-link:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      background: rgba(99, 102, 241, 0.08);
+      color: rgb(79 70 229);
+      transform: translateY(-1px);
+    }
+    :global(.dark) .speaker-pill-link {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgb(209 213 219);
+    }
+    :global(.dark) .speaker-pill-link:hover {
+      border-color: rgba(129, 140, 248, 0.5);
+      background: rgba(99, 102, 241, 0.15);
+      color: rgb(199 210 254);
+    }
+
+    .code-chip {
+      margin-top: 0.25rem;
+      width: fit-content;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.7);
+      color: rgb(31 41 55);
+      padding: 0.45rem 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: border-color 0.2s ease;
+    }
+    .code-chip:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    /* ── Navigation ── */
+    .nav-btn {
+      border-radius: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.78);
+      color: rgb(55 65 81);
+      padding: 0.5rem 0.92rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      min-width: 5.4rem;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-primary {
+      border-color: rgba(14, 116, 144, 0.45);
+      background: linear-gradient(
+        to right,
+        rgb(6, 182, 212),
+        rgb(99, 102, 241)
+      );
+      color: #fff;
+    }
+
+    /* ── Slide Dots - Circle Highlight ── */
+    .slide-dots {
+      display: flex;
+      gap: 0.7rem;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      scrollbar-width: thin;
+    }
+
+    :global(.dot-btn) {
+      min-width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.35);
+      background: rgba(255, 255, 255, 0.8);
+      color: rgb(55 65 81);
+      font-size: 0.78rem;
+      font-weight: 800;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    :global(.dot-btn:hover) {
+      background: rgb(248 250 252);
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+
+    :global(.dot-btn.is-active) {
+      border-color: transparent;
+      background: linear-gradient(135deg, rgb(99, 102, 241), rgb(6, 182, 212));
+      color: #fff;
+      box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.45),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.35),
+        0 4px 14px -4px rgba(99, 102, 241, 0.6);
+    }
+
+    /* ── Overview Mode ── */
+    .deck-wrap.is-overview .slide {
+      position: relative;
+      inset: auto;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      min-height: auto;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      padding-top: 1.2rem;
+      padding-bottom: 1.2rem;
+    }
+
+    .deck-wrap.is-overview .slide:first-of-type {
+      border-top: none;
+    }
+
+    .deck-wrap.is-overview .slide-title {
+      font-size: clamp(1.1rem, 2.1vw, 1.45rem);
+      max-width: none;
+    }
+
+    .deck-wrap.is-overview .slide-list,
+    .deck-wrap.is-overview .slide-text {
+      font-size: 0.95rem;
+    }
+
+    .deck-wrap.is-overview .slide-dots,
+    .deck-wrap.is-overview #progressBar,
+    .deck-wrap.is-overview #prevBtn,
+    .deck-wrap.is-overview #nextBtn {
+      display: none;
+    }
+
+    /* ── Dark mode base ── */
+    :global(.dark) .slide-title {
+      color: rgb(243 244 246);
+    }
+    :global(.dark) .slide-text {
+      color: rgb(209 213 219);
+    }
+    :global(.dark) .slide-list {
+      color: rgb(229 231 235);
+    }
+    :global(.dark) .slide-tags span {
+      border-color: rgba(103, 232, 249, 0.3);
+      background: rgba(8, 145, 178, 0.2);
+      color: rgb(165 243 252);
+    }
+    :global(.dark) .speaker-card {
+      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    :global(.dark) .speaker-name {
+      color: rgb(243 244 246);
+    }
+    :global(.dark) .speaker-role {
+      color: rgb(209 213 219);
+    }
+    :global(.dark) .code-chip {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgb(243 244 246);
+    }
+    :global(.dark) .nav-btn {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.07);
+      color: rgb(243 244 246);
+    }
+    :global(.dark .dot-btn) {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgb(229 231 235);
+    }
+    :global(.dark .dot-btn.is-active) {
+      border-color: transparent;
+      background: linear-gradient(135deg, rgb(99, 102, 241), rgb(6, 182, 212));
+      color: #fff;
+      box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.55),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.35),
+        0 4px 14px -4px rgba(99, 102, 241, 0.7);
+    }
+
+    /* ── Agenda Layout ── */
+    .agenda-layout {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      width: 100%;
+      flex: 1;
+    }
+    .agenda-section {
+      background: rgba(248, 250, 252, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 0.9rem;
+      padding: 1.1rem;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .agenda-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.08);
+    }
+    :global(.dark) .agenda-section {
+      background: rgba(255, 255, 255, 0.01);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+    .agenda-header {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: rgb(14, 116, 144);
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    :global(.dark) .agenda-header {
+      color: rgb(34, 211, 238);
+    }
+
+    /* ═══ AGENT HUB DIAGRAM ═══ */
+    .agent-hub-layout {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      width: 100%;
+      flex: 1;
+    }
+    .agent-hub-center {
+      position: relative;
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .agent-hub-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      border: 2.5px solid rgba(99, 102, 241, 0.45);
+      animation: hub-pulse 3s ease-in-out infinite;
+    }
+    .agent-hub-ring::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 999px;
+      border: 1.5px dashed rgba(6, 182, 212, 0.35);
+    }
+    @keyframes hub-pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.25);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+      }
+    }
+    .agent-hub-core {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
+      gap: 0.1rem;
+    }
+    .agent-hub-core strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+      color: rgb(67 56 202);
+      margin-top: 0.2rem;
+    }
+    :global(.dark) .agent-hub-core strong {
+      color: rgb(165 180 252);
+    }
+    .agent-hub-core span {
+      display: block;
+      font-size: 0.85rem;
+      color: rgb(107 114 128);
+    }
+    :global(.dark) .agent-hub-core span {
+      color: rgb(156 163 175);
+    }
+    .agent-hub-spokes {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+    .agent-hub-spoke {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 0.85rem;
+      padding: 1rem 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .agent-hub-spoke:hover {
+      transform: translateY(-3px);
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 6px 16px -6px rgba(99, 102, 241, 0.12);
+    }
+    :global(.dark) .agent-hub-spoke {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .spoke-plan {
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+    .spoke-tool {
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+    .spoke-mem {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .spoke-obs {
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+    .hub-spoke-icon {
+      font-size: 2.4rem;
+    }
+    .agent-hub-spoke strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+      margin: 0.35rem 0 0.3rem;
+    }
+    :global(.dark) .agent-hub-spoke strong {
+      color: rgb(243 244 246);
+    }
+    .agent-hub-spoke p {
+      font-size: 1.08rem;
+      color: rgb(107 114 128);
+      margin: 0;
+      line-height: 1.55;
+    }
+    :global(.dark) .agent-hub-spoke p {
+      color: rgb(156 163 175);
+    }
+
+    /* ═══ MAF FEATURE GRID ═══ */
+    .maf-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      max-width: 62rem;
+      width: 100%;
+    }
+    .maf-feature-card {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 0.9rem;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      transition: all 0.3s ease;
+    }
+    .maf-feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.1);
+    }
+    :global(.dark) .maf-feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .maf-feature-icon {
+      font-size: 1.4rem;
+    }
+    .maf-feature-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .maf-feature-title {
+      color: rgb(243 244 246);
+    }
+    .maf-feature-desc {
+      font-size: 0.78rem;
+      color: rgb(75 85 99);
+      line-height: 1.4;
+    }
+    :global(.dark) .maf-feature-desc {
+      color: rgb(209 213 219);
+    }
+    .maf-feature-code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      color: rgb(99 102 241);
+      background: rgba(99, 102, 241, 0.06);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.4rem;
+      margin-top: auto;
+      display: block;
+      width: fit-content;
+    }
+    :global(.dark) .maf-feature-code {
+      color: rgb(165 180 252);
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    /* ═══ MAF Slide Layout ═══ */
+    .maf-explanation-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.7fr) minmax(320px, 1.3fr);
+      gap: 1.75rem;
+      align-items: stretch;
+      max-width: none;
+      width: 100%;
+      flex: 1;
+    }
+    .maf-left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+    .maf-intro-text {
+      font-size: 1.42rem;
+      line-height: 1.72;
+      color: rgb(55 65 81);
+      margin: 0;
+    }
+    :global(.dark) .maf-intro-text {
+      color: rgb(209 213 219);
+    }
+    .maf-key-list {
+      margin: 0;
+      padding-left: 1.3rem;
+      display: grid;
+      gap: 0.85rem;
+      list-style: disc inside;
+      color: rgb(55 65 81);
+      font-size: 1.25rem;
+      line-height: 1.72;
+    }
+    .maf-key-list li {
+      margin: 0;
+      padding: 0;
+    }
+    :global(.dark) .maf-key-list {
+      color: rgb(209 213 219);
+    }
+    .maf-key-list code {
+      font-size: 1rem;
+      color: rgb(99 102 241);
+    }
+    :global(.dark) .maf-key-list code {
+      color: rgb(165 180 252);
+    }
+    .maf-feature-grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(180px, auto);
+      gap: 1rem;
+      height: 100%;
+      align-items: stretch;
+    }
+    .maf-feature-card-compact {
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 0.85rem;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      transition: all 0.3s ease;
+    }
+    .maf-card-title {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: rgb(67 56 202);
+    }
+    :global(.dark) .maf-card-title {
+      color: rgb(103 232 249);
+    }
+    .maf-card-desc {
+      font-size: 1.18rem;
+      line-height: 1.75;
+      color: rgb(107 114 128);
+      margin: 0;
+    }
+    :global(.dark) .maf-card-desc {
+      color: rgb(156 163 175);
+    }
+    .maf-card-desc code {
+      font-size: 1.1rem;
+      color: rgb(99 102 241);
+    }
+    :global(.dark) .maf-card-desc code {
+      color: rgb(165 180 252);
+    }
+    .maf-feature-card-compact:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 4px 12px -4px rgba(99, 102, 241, 0.15);
+    }
+    :global(.dark) .maf-feature-card-compact {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ═══ MEMORY FLOW DIAGRAM ═══ */
+    .memory-flow-diagram {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0.7rem;
+      width: 100%;
+      max-width: 100%;
+      background: rgba(248, 250, 252, 0.55);
+      border: 1px dashed rgba(99, 102, 241, 0.25);
+      border-radius: 1.1rem;
+      padding: 1.1rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      overflow: hidden;
+    }
+    :global(.dark) .memory-flow-diagram {
+      background: rgba(15, 17, 23, 0.45);
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    .mflow-node {
+      --mflow-accent: transparent;
+      flex: 1 1 0;
+      min-width: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(148, 163, 184, 0.24);
+      border-radius: 1rem;
+      padding: 1rem 0.9rem;
+      transition: all 0.25s ease;
+      min-height: 11rem;
+      justify-content: center;
+      box-sizing: border-box;
+      box-shadow: inset 4px 0 0 var(--mflow-accent);
+    }
+    :global(.dark) .mflow-node {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .mflow-node:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 4px 0 0 var(--mflow-accent),
+        0 18px 40px -22px rgba(99, 102, 241, 0.28);
+    }
+    .mflow-node-session {
+      --mflow-accent: rgb(99, 102, 241);
+    }
+    .mflow-node-context {
+      --mflow-accent: rgb(6, 182, 212);
+    }
+    .mflow-node-db {
+      --mflow-accent: rgb(16, 185, 129);
+    }
+    .mflow-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .mflow-node strong {
+      font-size: 1.1rem;
+      color: rgb(17 24 39);
+      letter-spacing: 0.01em;
+    }
+    :global(.dark) .mflow-node strong {
+      color: rgb(243 244 246);
+    }
+    .mflow-node span {
+      font-size: 0.95rem;
+      color: rgb(75 85 99);
+      line-height: 1.55;
+      max-width: 100%;
+    }
+    :global(.dark) .mflow-node span {
+      color: rgb(209 213 219);
+    }
+    .mflow-arrow {
+      font-size: 1.5rem;
+      color: rgb(79 70 229);
+      flex: 0 0 auto;
+    }
+    @media (max-width: 920px) {
+      .memory-flow-diagram {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .mflow-node {
+        flex: 1 1 100%;
+        min-width: auto;
+      }
+      .mflow-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    /* ═══ LOOP DIAGRAM ═══ */
+    .loop-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .loop-node {
+      flex: 0 0 auto;
+      width: clamp(180px, 21vw, 260px);
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      border-radius: 1.1rem;
+      padding: 1rem 0.85rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .loop-node:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.15);
+    }
+    :global(.dark) .loop-node {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .loop-node-num {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgb(99, 102, 241), rgb(6, 182, 212));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loop-node-icon {
+      font-size: 1.4rem;
+    }
+    .loop-node-label {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .loop-node-label {
+      color: rgb(243 244 246);
+    }
+    .loop-node-desc {
+      font-size: 0.68rem;
+      color: rgb(107 114 128);
+      line-height: 1.3;
+      margin-top: 0.35rem;
+    }
+    :global(.dark) .loop-node-desc {
+      color: rgb(156 163 175);
+    }
+    .loop-think {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .loop-act {
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+    .loop-observe {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .loop-respond {
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+    .loop-connector {
+      width: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .loop-arrow-svg {
+      width: 52px;
+      height: 20px;
+    }
+    .loop-return-arrow {
+      position: relative;
+      margin-top: -0.2rem;
+      text-align: center;
+    }
+    .loop-return-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(139, 92, 246, 0.6);
+      white-space: nowrap;
+    }
+
+    /* ═══ TOOL CALL FLOW ═══ */
+    .tc-flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0.35rem;
+      width: 100%;
+      max-width: 100%;
+      flex: 1;
+      flex-wrap: nowrap;
+      justify-content: center;
+      overflow-x: auto;
+      padding-bottom: 0.35rem;
+    }
+    .tc-flow::-webkit-scrollbar {
+      height: 8px;
+    }
+    .tc-flow::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 999px;
+    }
+    .tc-step {
+      flex: 0 0 auto;
+      min-width: 150px;
+      max-width: 220px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(148, 163, 184, 0.3);
+      border-radius: 0.85rem;
+      padding: 1.05rem 0.75rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.3s ease;
+    }
+    .tc-step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.12);
+    }
+    :global(.dark) .tc-step {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .tc-step-user {
+      border-color: rgba(148, 163, 184, 0.4);
+    }
+    .tc-step-agent {
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.05);
+    }
+    .tc-step-llm {
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(139, 92, 246, 0.05);
+    }
+    .tc-step-tool {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .tc-step-output {
+      border-color: rgba(6, 182, 212, 0.4);
+      background: rgba(6, 182, 212, 0.05);
+    }
+    :global(.dark) .tc-step-agent {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+    :global(.dark) .tc-step-llm {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+    :global(.dark) .tc-step-tool {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    :global(.dark) .tc-step-output {
+      background: rgba(6, 182, 212, 0.1);
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+    .tc-icon {
+      font-size: 1.6rem;
+    }
+    .tc-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .tc-label {
+      color: rgb(243 244 246);
+    }
+    .tc-sub {
+      font-size: 0.67rem;
+      color: rgb(107 114 128);
+      line-height: 1.3;
+    }
+    .tc-sub code {
+      font-size: 0.65rem;
+      color: rgb(99 102 241);
+      font-family: "JetBrains Mono", monospace;
+    }
+    :global(.dark) .tc-sub {
+      color: rgb(156 163 175);
+    }
+    :global(.dark) .tc-sub code {
+      color: rgb(165 180 252);
+    }
+    .tc-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.35rem;
+      font-size: 1.4rem;
+      color: rgba(99, 102, 241, 0.5);
+      flex-shrink: 0;
+    }
+    :global(.dark) .tc-arrow {
+      color: rgba(165, 180, 252, 0.6);
+    }
+
+    /* ═══ MCP DIAGRAM ═══ */
+    .mcp-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1.25rem;
+      align-items: center;
+      max-width: none;
+      width: 100%;
+    }
+    .mcp-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .mcp-box {
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 1rem;
+      padding: 1.15rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .mcp-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.12);
+    }
+    :global(.dark) .mcp-box {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .mcp-host {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .mcp-server {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .mcp-server-2 {
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .mcp-box-icon {
+      font-size: 2rem;
+    }
+    .mcp-box-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .mcp-box-title {
+      color: rgb(243 244 246);
+    }
+    .mcp-box-desc {
+      font-size: 0.85rem;
+      color: rgb(107 114 128);
+      margin-top: 0.3rem;
+    }
+    :global(.dark) .mcp-box-desc {
+      color: rgb(156 163 175);
+    }
+    .mcp-col-center {
+      align-items: center;
+    }
+    .mcp-bridge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .mcp-bridge-line {
+      width: 3px;
+      height: 24px;
+      background: linear-gradient(
+        to bottom,
+        rgba(99, 102, 241, 0.3),
+        rgba(6, 182, 212, 0.3)
+      );
+      border-radius: 2px;
+    }
+    .mcp-bridge-label {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: rgb(99 102 241);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      line-height: 1.25;
+    }
+    :global(.dark) .mcp-bridge-label {
+      color: rgb(165 180 252);
+    }
+    .mcp-bridge-icon {
+      font-size: 1.7rem;
+    }
+    .mcp-capabilities {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-items: center;
+      margin-top: 0.75rem;
+    }
+    .mcp-cap {
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: rgba(99, 102, 241, 0.15);
+      color: rgb(67 56 202);
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    :global(.dark) .mcp-cap {
+      background: rgba(99, 102, 241, 0.2);
+      color: rgb(199 210 254);
+    }
+
+    /* ═══ MEMORY COMPARE ═══ */
+    .memory-compare {
+      display: flex;
+      align-items: stretch;
+      gap: 1.25rem;
+      max-width: none;
+      width: 100%;
+    }
+    .memory-card {
+      flex: 1;
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 1rem;
+      padding: 1.15rem;
+      transition: all 0.3s ease;
+    }
+    .memory-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.1);
+    }
+    :global(.dark) .memory-card {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .memory-session {
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+    .memory-persistent {
+      border-color: rgba(6, 182, 212, 0.35);
+    }
+    .memory-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .memory-card-header h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+      margin: 0;
+    }
+    :global(.dark) .memory-card-header h4 {
+      color: rgb(243 244 246);
+    }
+    .memory-icon {
+      font-size: 1.3rem;
+    }
+    .memory-list {
+      margin: 0;
+      padding-left: 1rem;
+      list-style: disc;
+      font-size: 0.82rem;
+      color: rgb(75 85 99);
+      line-height: 1.6;
+    }
+    :global(.dark) .memory-list {
+      color: rgb(209 213 219);
+    }
+    .memory-lifetime {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgb(99 102 241);
+      text-align: center;
+      padding: 0.3rem;
+      background: rgba(99, 102, 241, 0.06);
+      border-radius: 0.5rem;
+    }
+    :global(.dark) .memory-lifetime {
+      color: rgb(165 180 252);
+      background: rgba(99, 102, 241, 0.15);
+    }
+    .memory-vs {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: rgb(148 163 184);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* ═══ WORKFLOW PIPELINE ═══ */
+    .workflow-pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .wf-node {
+      flex: 0 0 auto;
+      width: clamp(180px, 21vw, 260px);
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      border-radius: 1rem;
+      padding: 1rem 0.9rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .wf-node:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px -6px rgba(99, 102, 241, 0.12);
+    }
+    :global(.dark) .wf-node {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .wf-triage {
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+    .wf-agent {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .wf-capture {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .wf-node-icon {
+      font-size: 1.4rem;
+    }
+    .wf-node-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .wf-node-title {
+      color: rgb(243 244 246);
+    }
+    .wf-node-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: rgb(99 102 241);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    :global(.dark) .wf-node-type {
+      color: rgb(165 180 252);
+    }
+    .wf-node-desc {
+      font-size: 0.7rem;
+      color: rgb(107 114 128);
+      margin-top: 0.2rem;
+    }
+    :global(.dark) .wf-node-desc {
+      color: rgb(156 163 175);
+    }
+    .wf-edge {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .wf-edge svg {
+      width: 50px;
+      height: 16px;
+    }
+
+    /* ═══ OPS CAPABILITIES ═══ */
+    .ops-capabilities {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: none;
+      width: 100%;
+    }
+    .ops-cap-card {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 0.9rem;
+      padding: 1.1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .ops-cap-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px -6px rgba(99, 102, 241, 0.1);
+    }
+    :global(.dark) .ops-cap-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .ops-cap-icon {
+      font-size: 1.6rem;
+    }
+    .ops-cap-card h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: rgb(17 24 39);
+      margin: 0.3rem 0 0.15rem;
+    }
+    :global(.dark) .ops-cap-card h4 {
+      color: rgb(243 244 246);
+    }
+    .ops-cap-card p {
+      font-size: 0.72rem;
+      color: rgb(107 114 128);
+      margin: 0;
+      line-height: 1.3;
+    }
+    :global(.dark) .ops-cap-card p {
+      color: rgb(156 163 175);
+    }
+
+    /* ═══ MODULE TRACK ═══ */
+    .module-track {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: none;
+      width: 100%;
+    }
+    .module-card {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 0.85rem;
+      padding: 0.9rem 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .module-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 4px 16px -4px rgba(99, 102, 241, 0.08);
+    }
+    :global(.dark) .module-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .module-num {
+      min-width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 0.6rem;
+      background: linear-gradient(135deg, rgb(99, 102, 241), rgb(6, 182, 212));
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .module-info strong {
+      display: block;
+      font-size: 0.92rem;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .module-info strong {
+      color: rgb(243 244 246);
+    }
+    .module-info span {
+      font-size: 0.78rem;
+      color: rgb(107 114 128);
+    }
+    :global(.dark) .module-info span {
+      color: rgb(156 163 175);
+    }
+
+    /* ═══ ARCHITECTURE STACK ═══ */
+    .arch-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: none;
+      width: 100%;
+    }
+    .arch-layer {
+      width: 100%;
+      border: 2px solid rgba(99, 102, 241, 0.25);
+      background: rgba(99, 102, 241, 0.04);
+      border-radius: 0.8rem;
+      padding: 0.95rem 1.15rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .arch-layer:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px -6px rgba(99, 102, 241, 0.1);
+    }
+    :global(.dark) .arch-layer {
+      background: rgba(99, 102, 241, 0.08);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+    .arch-layer strong {
+      display: block;
+      font-size: 0.9rem;
+      color: rgb(67 56 202);
+    }
+    :global(.dark) .arch-layer strong {
+      color: rgb(165 180 252);
+    }
+    .arch-layer span {
+      font-size: 0.72rem;
+      color: rgb(107 114 128);
+    }
+    :global(.dark) .arch-layer span {
+      color: rgb(156 163 175);
+    }
+    .arch-layer-badge {
+      position: absolute;
+      top: -8px;
+      left: 12px;
+      font-size: 0.55rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, rgb(99, 102, 241), rgb(6, 182, 212));
+      color: #fff;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+    }
+    .arch-layer-connector {
+      width: 3px;
+      height: 10px;
+      background: linear-gradient(
+        to bottom,
+        rgba(99, 102, 241, 0.3),
+        rgba(6, 182, 212, 0.3)
+      );
+      border-radius: 2px;
+    }
+    .arch-layer-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    .arch-layer-4 {
+      border-color: rgba(6, 182, 212, 0.3);
+      background: rgba(6, 182, 212, 0.04);
+    }
+    :global(.dark) .arch-layer-4 {
+      border-color: rgba(6, 182, 212, 0.2);
+      background: rgba(6, 182, 212, 0.08);
+    }
+    .arch-layer-4 strong {
+      color: rgb(14 116 144);
+    }
+    :global(.dark) .arch-layer-4 strong {
+      color: rgb(103 232 249);
+    }
+    .arch-layer-5 {
+      border-color: rgba(6, 182, 212, 0.3);
+      background: rgba(6, 182, 212, 0.04);
+    }
+    :global(.dark) .arch-layer-5 {
+      border-color: rgba(6, 182, 212, 0.2);
+      background: rgba(6, 182, 212, 0.08);
+    }
+    .arch-layer-5 strong {
+      color: rgb(14 116 144);
+    }
+    :global(.dark) .arch-layer-5 strong {
+      color: rgb(103 232 249);
+    }
+    .arch-layer-6 {
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.04);
+    }
+    :global(.dark) .arch-layer-6 {
+      border-color: rgba(245, 158, 11, 0.2);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .arch-layer-6 strong {
+      color: rgb(180 83 9);
+    }
+    :global(.dark) .arch-layer-6 strong {
+      color: rgb(252 211 77);
+    }
+
+    /* ═══ TIMELINE FLOW ═══ */
+    .timeline-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.7rem;
+      max-width: none;
+      width: 100%;
+      position: relative;
+      padding-top: 2rem;
+    }
+    @media (min-width: 921px) {
+      .timeline-flow::before {
+        content: "";
+        position: absolute;
+        top: 0.75rem;
+        left: 5%;
+        right: 5%;
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          rgb(99, 102, 241),
+          rgb(6, 182, 212),
+          rgb(16, 185, 129),
+          rgb(139, 92, 246),
+          rgb(244, 63, 94),
+          rgb(245, 158, 11)
+        );
+        z-index: 0;
+        border-radius: 99px;
+        opacity: 0.55;
+      }
+    }
+    .timeline-block {
+      border: 2px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 0.9rem;
+      padding: 1rem 0.7rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: visible;
+      z-index: 1;
+    }
+    .timeline-block::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .timeline-block:hover {
+      transform: translateY(-3px);
+    }
+    .timeline-block:hover::before {
+      opacity: 1;
+    }
+    :global(.dark) .timeline-block {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .tb-theory {
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+    .tb-setup {
+      border-color: rgba(6, 182, 212, 0.35);
+    }
+    .tb-tools {
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .tb-memory {
+      border-color: rgba(139, 92, 246, 0.35);
+    }
+    .tb-wf {
+      border-color: rgba(244, 63, 94, 0.35);
+    }
+    .tb-deploy {
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .timeline-time {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: rgb(99 102 241);
+      margin-bottom: 0.3rem;
+    }
+    :global(.dark) .timeline-time {
+      color: rgb(165 180 252);
+    }
+    .timeline-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: rgb(55 65 81);
+      line-height: 1.3;
+    }
+    :global(.dark) .timeline-label {
+      color: rgb(229 231 235);
+    }
+
+    /* ═══ RESOURCES GRID ═══ */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: none;
+      width: 100%;
+    }
+    .resource-card {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 0.9rem;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .resource-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 10px 28px -8px rgba(99, 102, 241, 0.12);
+    }
+    :global(.dark) .resource-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .resource-icon {
+      font-size: 1.5rem;
+    }
+    .resource-card strong {
+      font-size: 0.95rem;
+      color: rgb(17 24 39);
+    }
+    :global(.dark) .resource-card strong {
+      color: rgb(243 244 246);
+    }
+    .resource-card span {
+      font-size: 0.78rem;
+      color: rgb(107 114 128);
+    }
+    :global(.dark) .resource-card span {
+      color: rgb(156 163 175);
+    }
+
+    /* ── Animations ── */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease both;
+    }
+    .animate-slide-up {
+      animation: slide-up 0.7s ease both;
+    }
+    .animate-slide-up-delay {
+      animation: slide-up 0.7s ease 0.15s both;
+    }
+    .animate-fade-in-delay {
+      animation: fade-in 0.6s ease 0.25s both;
+    }
+    .animate-fade-in-delay-2 {
+      animation: fade-in 0.6s ease 0.45s both;
+    }
+
+    /* ── Unified Content Typography (Non-title text) ── */
+    .slide
+      :is(
+        .slide-text,
+        .slide-list,
+        .agenda-list-simple,
+        .maf-intro-text,
+        .maf-key-list,
+        .maf-card-desc,
+        .agent-hub-spoke p,
+        .loop-node-desc,
+        .tc-sub,
+        .mcp-box-desc,
+        .mflow-node span,
+        .memory-list,
+        .wf-node-desc,
+        .ops-cap-card p,
+        .module-info span,
+        .arch-layer span,
+        .timeline-label,
+        .resource-card span
+      ) {
+      font-size: 1.16rem;
+      line-height: 1.64;
+    }
+
+    .slide
+      :is(
+        .maf-card-title,
+        .agent-hub-spoke strong,
+        .loop-node-label,
+        .tc-label,
+        .mcp-box-title,
+        .mflow-node strong,
+        .memory-card-header h4,
+        .wf-node-title,
+        .ops-cap-card h4,
+        .module-info strong,
+        .arch-layer strong,
+        .timeline-time,
+        .resource-card strong
+      ) {
+      font-size: 1.28rem;
+      line-height: 1.4;
+    }
+
+    /* ── Fullscreen Adaptations ── */
+    .deck-wrap:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      border-radius: 0 !important;
+      border: none !important;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      padding: 0;
+    }
+    :global(.dark) .deck-wrap:fullscreen {
+      background: #0f1117;
+    }
+    .deck-wrap:fullscreen .slides-container {
+      flex: 1 1 auto;
+      height: 0;
+      min-height: 0;
+    }
+    .deck-wrap:fullscreen .slide {
+      padding: clamp(4rem, 6vw, 8rem) clamp(4rem, 8vw, 10rem);
+      justify-content: center;
+    }
+    /* Larger text in fullscreen */
+    .deck-wrap:fullscreen .slide-title {
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+    }
+    .deck-wrap:fullscreen .slide-text {
+      font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+    }
+    .deck-wrap:fullscreen .slide-kicker {
+      font-size: 1.35rem;
+    }
+    .deck-wrap:fullscreen .slide-list {
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+    }
+    .deck-wrap:fullscreen .agenda-list-simple {
+      font-size: 1.45rem;
+    }
+    .deck-wrap:fullscreen .code-chip {
+      font-size: 1.25rem;
+      padding: 0.65rem 1.2rem;
+    }
+
+    /* Fullscreen Layout Alignment Enhancements */
+    .deck-wrap:fullscreen .slide1-layout {
+      align-items: center;
+    }
+    .deck-wrap:fullscreen .speaker-card-hero {
+      max-width: 380px;
+      padding: 3rem 2.5rem;
+      border-width: 2px;
+    }
+    .deck-wrap:fullscreen .speaker-hero-photo-wrap img {
+      width: 220px;
+      height: 220px;
+      border-width: 6px;
+    }
+    .deck-wrap:fullscreen .speaker-name-hero {
+      font-size: 2.2rem;
+    }
+    .deck-wrap:fullscreen .speaker-role-hero {
+      font-size: 1.2rem;
+    }
+    .deck-wrap:fullscreen .speaker-pill-link {
+      font-size: 1.1rem;
+      padding: 0.75rem 1.25rem;
+    }
+
+    /* Diagram Scale Enhancements in Fullscreen */
+    .deck-wrap:fullscreen .agent-hub-center {
+      width: 260px;
+      height: 260px;
+    }
+    .deck-wrap:fullscreen .agent-hub-core strong {
+      font-size: 1.4rem;
+    }
+    .deck-wrap:fullscreen .agent-hub-core span {
+      font-size: 1rem;
+    }
+    .deck-wrap:fullscreen .hub-spoke-icon {
+      font-size: 3.2rem;
+    }
+
+    .deck-wrap:fullscreen .tc-step,
+    .deck-wrap:fullscreen .wf-node,
+    .deck-wrap:fullscreen .loop-node {
+      width: clamp(220px, 24vw, 320px);
+      padding: 1.5rem;
+    }
+    .deck-wrap:fullscreen .tc-icon,
+    .deck-wrap:fullscreen .wf-node-icon,
+    .deck-wrap:fullscreen .loop-node-icon,
+    .deck-wrap:fullscreen .ops-cap-icon,
+    .deck-wrap:fullscreen .resource-icon,
+    .deck-wrap:fullscreen .mcp-box-icon {
+      font-size: 2.5rem;
+    }
+    .deck-wrap:fullscreen .tc-arrow,
+    .deck-wrap:fullscreen .mflow-arrow {
+      font-size: 2rem;
+    }
+
+    .deck-wrap:fullscreen .module-num {
+      min-width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.2rem;
+    }
+
+    .deck-wrap:fullscreen .arch-layer-badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      top: -12px;
+      left: 16px;
+    }
+
+    .deck-wrap:fullscreen
+      .slide
+      :is(
+        .slide-text,
+        .slide-list,
+        .agenda-list-simple,
+        .maf-intro-text,
+        .maf-key-list,
+        .maf-card-desc,
+        .agent-hub-spoke p,
+        .loop-node-desc,
+        .tc-sub,
+        .mcp-box-desc,
+        .mflow-node span,
+        .memory-list,
+        .wf-node-desc,
+        .ops-cap-card p,
+        .module-info span,
+        .arch-layer span,
+        .timeline-label,
+        .resource-card span
+      ) {
+      font-size: 1.32rem;
+      line-height: 1.7;
+    }
+    .deck-wrap:fullscreen
+      .slide
+      :is(
+        .maf-card-title,
+        .agent-hub-spoke strong,
+        .loop-node-label,
+        .tc-label,
+        .mcp-box-title,
+        .mflow-node strong,
+        .memory-card-header h4,
+        .wf-node-title,
+        .ops-cap-card h4,
+        .module-info strong,
+        .arch-layer strong,
+        .timeline-time,
+        .resource-card strong
+      ) {
+      font-size: 1.5rem;
+      line-height: 1.45;
+    }
+    .deck-wrap:fullscreen .slide-secondary-title {
+      font-size: 1.5rem;
+    }
+    .deck-wrap:fullscreen .slide-watermark {
+      top: 1.5rem;
+      right: 2.5rem;
+      opacity: 0.22;
+    }
+    .deck-wrap:fullscreen .watermark-title {
+      font-size: 0.9rem;
+    }
+    .deck-wrap:fullscreen .watermark-speaker {
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 920px) {
+      .maf-feature-grid,
+      .agenda-layout,
+      .ops-capabilities,
+      .timeline-flow,
+      .resources-grid,
+      .arch-layer-split {
+        grid-template-columns: 1fr;
+      }
+      .tool-seq-diagram {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .tool-seq-lane {
+        min-height: auto;
+      }
+      .mcp-diagram {
+        grid-template-columns: 1fr;
+      }
+      .memory-compare {
+        flex-direction: column;
+      }
+      .memory-vs {
+        justify-content: center;
+      }
+      .loop-diagram {
+        flex-direction: column;
+        align-items: center;
+      }
+      .loop-connector {
+        transform: rotate(90deg);
+        height: 40px;
+        width: 16px;
+      }
+      .workflow-pipeline {
+        flex-direction: column;
+        align-items: center;
+      }
+      .wf-edge {
+        transform: rotate(90deg);
+        height: 50px;
+        width: 16px;
+      }
+      .slide {
+        gap: 0.75rem;
+      }
+      .speaker-card {
+        width: 100%;
+      }
+      .slide-dots {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const label = document.getElementById("slideLabel");
+      const title = document.getElementById("slideTitle");
+      const progressBar = document.getElementById("progressBar");
+      const overviewBtn = document.getElementById("overviewBtn");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const deck = document.querySelector(".deck-wrap");
+      const dotsWrap = document.getElementById("slideDots");
+      const canvas = document.getElementById("mouseCanvas");
+
+      if (
+        !slides.length ||
+        !nextBtn ||
+        !prevBtn ||
+        !label ||
+        !title ||
+        !progressBar ||
+        !overviewBtn ||
+        !fullscreenBtn ||
+        !deck ||
+        !dotsWrap ||
+        !canvas
+      ) {
+        return;
+      }
+
+      let current = 0;
+      let overview = false;
+      let touchStartX = 0;
+
+      // ── Quantum Nexus Aura & Interactive Sparks Mouse Tracker ──
+      const ctx = canvas.getContext("2d");
+      let sparks = [];
+      let ripples = [];
+      let mouseX = -500,
+        mouseY = -500;
+      let targetMouseX = -500,
+        targetMouseY = -500;
+      let lastMoveTime = 0;
+      let animFrame = null;
+
+      const resizeCanvas = () => {
+        const rect = deck.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      };
+
+      class Spark {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 2 + 0.5;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed;
+          this.size = Math.random() * 2.5 + 1.2;
+          this.alpha = 1;
+          this.decay = Math.random() * 0.015 + 0.01;
+          // Cycled color hue: 180 (cyan) to 270 (purple)
+          this.hue = Math.floor(Math.random() * 90) + 180;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vx *= 0.97;
+          this.vy *= 0.97;
+          this.alpha -= this.decay;
+        }
+        draw() {
+          if (this.alpha <= 0) return;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${this.hue}, 90%, 65%, ${this.alpha})`;
+          ctx.fill();
+        }
+      }
+
+      class Ripple {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.radius = 0;
+          this.maxRadius = 150;
+          this.alpha = 1;
+          this.speed = 4;
+        }
+        update() {
+          this.radius += this.speed;
+          this.alpha = 1 - this.radius / this.maxRadius;
+        }
+        draw() {
+          if (this.alpha <= 0) return;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(99, 102, 241, ${this.alpha * 0.35})`;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        }
+      }
+
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Interpolate mouse coordinates (smooth spring delay)
+        if (targetMouseX > -100) {
+          if (mouseX < 0) {
+            mouseX = targetMouseX;
+            mouseY = targetMouseY;
+          } else {
+            mouseX += (targetMouseX - mouseX) * 0.12;
+            mouseY += (targetMouseY - mouseY) * 0.12;
+          }
+
+          // Draw the soft interactive glowing aura (radial gradient)
+          const glow = ctx.createRadialGradient(
+            mouseX,
+            mouseY,
+            5,
+            mouseX,
+            mouseY,
+            95,
+          );
+          glow.addColorStop(0, "rgba(99, 102, 241, 0.18)");
+          glow.addColorStop(0.5, "rgba(6, 182, 212, 0.06)");
+          glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(mouseX, mouseY, 95, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          // Fade mouse out off-screen
+          mouseX = -500;
+          mouseY = -500;
+        }
+
+        // Update and draw sparks
+        sparks = sparks.filter((s) => s.alpha > 0);
+        sparks.forEach((s) => {
+          s.update();
+          s.draw();
+        });
+
+        // Update and draw ripples
+        ripples = ripples.filter((r) => r.alpha > 0);
+        ripples.forEach((r) => {
+          r.update();
+          r.draw();
+
+          // Push sparks outward from ripple
+          sparks.forEach((s) => {
+            const dx = s.x - r.x;
+            const dy = s.y - r.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > 0 && Math.abs(dist - r.radius) < 15) {
+              const pushForce = (1 - dist / r.maxRadius) * 0.8;
+              s.vx += (dx / dist) * pushForce;
+              s.vy += (dy / dist) * pushForce;
+            }
+          });
+        });
+
+        animFrame = requestAnimationFrame(animate);
+      };
+
+      resizeCanvas();
+      animate();
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+      });
+
+      deck.addEventListener("mousemove", (e) => {
+        const rect = deck.getBoundingClientRect();
+        targetMouseX = e.clientX - rect.left;
+        targetMouseY = e.clientY - rect.top;
+
+        // Spawn spark particles on movement
+        const now = performance.now();
+        if (now - lastMoveTime > 20) {
+          // Limit spawn rate
+          sparks.push(new Spark(targetMouseX, targetMouseY));
+          if (sparks.length > 80) sparks.shift();
+          lastMoveTime = now;
+        }
+      });
+
+      deck.addEventListener("mouseleave", () => {
+        targetMouseX = -500;
+        targetMouseY = -500;
+      });
+
+      deck.addEventListener("click", (e) => {
+        const rect = deck.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        ripples.push(new Ripple(clickX, clickY));
+
+        // Spawn a burst of sparks on click
+        for (let i = 0; i < 15; i++) {
+          sparks.push(new Spark(clickX, clickY));
+        }
+      });
+
+      // ── Slide Dots ──
+      const dots = slides.map((_, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "dot-btn";
+        btn.textContent = String(idx + 1);
+        btn.setAttribute("aria-label", `Go to slide ${idx + 1}`);
+        btn.addEventListener("click", () => go(idx));
+        dotsWrap.appendChild(btn);
+        return btn;
+      });
+
+      const updateFullscreenButton = () => {
+        const active = Boolean(document.fullscreenElement);
+        fullscreenBtn.setAttribute("aria-pressed", String(active));
+        fullscreenBtn.textContent = active ? "Exit Fullscreen" : "Fullscreen";
+      };
+
+      const render = () => {
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle("is-active", idx === current);
+        });
+
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("is-active", idx === current);
+        });
+
+        const currentSlide = slides[current];
+        label.textContent = `${current + 1} / ${slides.length}`;
+        title.textContent = currentSlide.dataset.title || "";
+        progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+
+        // Smooth scroll the dot list without shifting the outer page
+        const activeDot = dots[current];
+        if (activeDot && dotsWrap) {
+          const containerRect = dotsWrap.getBoundingClientRect();
+          const dotRect = activeDot.getBoundingClientRect();
+          const scrollLeft =
+            dotsWrap.scrollLeft +
+            (dotRect.left - containerRect.left) -
+            containerRect.width / 2 +
+            dotRect.width / 2;
+          dotsWrap.scrollTo({ left: scrollLeft, behavior: "smooth" });
+        }
+      };
+
+      const go = (idx) => {
+        if (overview) return;
+        current = Math.max(0, Math.min(slides.length - 1, idx));
+        render();
+      };
+
+      const setOverview = (value) => {
+        overview = value;
+        deck.classList.toggle("is-overview", overview);
+        overviewBtn.setAttribute("aria-pressed", String(overview));
+        overviewBtn.textContent = overview ? "Exit Overview" : "Overview";
+      };
+
+      const toggleFullscreen = async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await deck.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch {
+          // Ignore fullscreen errors
+        }
+        updateFullscreenButton();
+        // Resize canvas after fullscreen change
+        setTimeout(() => {
+          resizeCanvas();
+        }, 300);
+      };
+
+      nextBtn.addEventListener("click", () => go(current + 1));
+      prevBtn.addEventListener("click", () => go(current - 1));
+      overviewBtn.addEventListener("click", () => setOverview(!overview));
+      fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+      document.addEventListener("fullscreenchange", () => {
+        updateFullscreenButton();
+        setTimeout(() => {
+          resizeCanvas();
+        }, 300);
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (
+          ["INPUT", "TEXTAREA", "SELECT"].includes(
+            document.activeElement?.tagName || "",
+          )
+        )
+          return;
+
+        if (
+          event.key === "ArrowRight" ||
+          event.key === "PageDown" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          go(current + 1);
+        } else if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          go(current - 1);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          go(0);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          go(slides.length - 1);
+        } else if (event.key.toLowerCase() === "o") {
+          event.preventDefault();
+          setOverview(!overview);
+        } else if (event.key.toLowerCase() === "f") {
+          event.preventDefault();
+          toggleFullscreen();
+        }
+      });
+
+      deck.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartX = event.changedTouches[0]?.clientX || 0;
+        },
+        { passive: true },
+      );
+
+      deck.addEventListener(
+        "touchend",
+        (event) => {
+          const touchEndX = event.changedTouches[0]?.clientX || 0;
+          const delta = touchEndX - touchStartX;
+          if (Math.abs(delta) < 45 || overview) return;
+          if (delta < 0) go(current + 1);
+          else go(current - 1);
+        },
+        { passive: true },
+      );
+
+      updateFullscreenButton();
+      render();
+    })();
+  </script>
+</BaseLayout>
