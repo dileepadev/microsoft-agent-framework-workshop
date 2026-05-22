@@ -1,0 +1,67 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Background Gradient -->
+        <linearGradient id="bgGradient" x1="0" y1="0" x2="256" y2="256"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#180918" />
+            <stop offset="100%" stop-color="#3b1633" />
+        </linearGradient>
+
+        <!-- Accent Gradient -->
+        <linearGradient id="accentGradient" x1="64" y1="64" x2="192" y2="192"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff78b9" />
+            <stop offset="100%" stop-color="#ff2f92" />
+        </linearGradient>
+
+        <!-- Eye Glow -->
+        <radialGradient id="eyeGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#ff9ed0" stop-opacity="0.82" />
+            <stop offset="100%" stop-color="#ff9ed0" stop-opacity="0" />
+        </radialGradient>
+    </defs>
+
+    <!-- Outer Canvas / App Shape -->
+    <rect x="0" y="0" width="256" height="256" rx="40" fill="url(#bgGradient)" />
+
+    <!-- Circuit Background Lines -->
+    <path d="M0 64H40V96H80" stroke="#6a2957" stroke-width="2" stroke-linejoin="round" fill="none" />
+    <path d="M256 192H216V160H176" stroke="#6a2957" stroke-width="2" stroke-linejoin="round"
+        fill="none" />
+    <path d="M48 256V216L80 176" stroke="#6a2957" stroke-width="2" stroke-linejoin="round"
+        fill="none" />
+    <path d="M208 0V40L176 80" stroke="#6a2957" stroke-width="2" stroke-linejoin="round" fill="none" />
+
+    <!-- Robot Head Outline / Shell -->
+    <path
+        d="M72 120C72 90.1766 96.1766 66 126 66H130C159.823 66 184 90.1766 184 120V152C184 174.091 166.091 192 144 192H112C89.9086 192 72 174.091 72 152V120Z"
+        fill="#34152f" stroke="url(#accentGradient)" stroke-width="6" />
+
+    <!-- Top Antenna -->
+    <rect x="122" y="32" width="12" height="34" rx="4" fill="url(#accentGradient)" />
+    <circle cx="128" cy="30" r="10" fill="#ff8cc6" />
+    <circle cx="128" cy="30" r="4" fill="#ffffff" />
+
+    <!-- Ear / Communication Modules -->
+    <rect x="54" y="112" width="18" height="48" rx="8" fill="#d946a1" />
+    <rect x="184" y="112" width="18" height="48" rx="8" fill="#d946a1" />
+    <rect x="46" y="124" width="8" height="24" rx="4" fill="#ff78b9" />
+    <rect x="202" y="124" width="8" height="24" rx="4" fill="#ff78b9" />
+
+    <!-- Main Visor area -->
+    <rect x="88" y="100" width="80" height="44" rx="20" fill="#160612" />
+
+    <!-- Glowing Electronic Eyes -->
+    <circle cx="112" cy="122" r="16" fill="url(#eyeGlow)" />
+    <rect x="104" y="118" width="16" height="8" rx="4" fill="#ffffff" />
+
+    <circle cx="144" cy="122" r="16" fill="url(#eyeGlow)" />
+    <rect x="136" y="118" width="16" height="8" rx="4" fill="#ffffff" />
+
+    <!-- Speaker / Mouth Grill -->
+    <rect x="116" y="164" width="24" height="6" rx="3" fill="#d946a1" />
+    <rect x="122" y="176" width="12" height="4" rx="2" fill="#ff78b9" />
+
+    <!-- Forehead Tech Detail -->
+    <path d="M128 88L116 78H140L128 88Z" fill="#d946a1" opacity="0.88" />
+</svg>
