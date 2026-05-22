@@ -1,5 +1,19 @@
 # 6. Multi-Turn Conversations
 
+- [6. Multi-Turn Conversations](#6-multi-turn-conversations)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [Why Multi-Turn Matters](#why-multi-turn-matters)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Ensure GitHub Environment Variables](#step-2---ensure-github-environment-variables)
+  - [Step 3 - Build Agent and Create Session](#step-3---build-agent-and-create-session)
+  - [Step 4 - Run a Multi-Turn Loop](#step-4---run-a-multi-turn-loop)
+  - [Step 5 - Complete Code (Single File)](#step-5---complete-code-single-file)
+  - [Run the Script](#run-the-script)
+  - [Example Comparison](#example-comparison)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Next](#next)
+
 In this module, you enable OpsAgent to remember user context across multiple turns by reusing an `AgentSession`.
 
 You will now run the same script in two modes to compare behavior:

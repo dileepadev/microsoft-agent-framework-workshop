@@ -1,5 +1,21 @@
 # 7. Memory & Persistence
 
+- [7. Memory \& Persistence](#7-memory--persistence)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [Multi-Turn vs Memory \& Persistence](#multi-turn-vs-memory--persistence)
+  - [Why Memory \& Persistence Matters](#why-memory--persistence-matters)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Ensure GitHub Environment Variables](#step-2---ensure-github-environment-variables)
+  - [Step 3 - Define the UserMemoryProvider](#step-3---define-the-usermemoryprovider)
+  - [Step 4 - Register Providers and Create Agent](#step-4---register-providers-and-create-agent)
+  - [Step 5 - Complete Code (Single File)](#step-5---complete-code-single-file)
+  - [Run the Script](#run-the-script)
+  - [Example Output](#example-output)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Key Concepts](#key-concepts)
+  - [Next](#next)
+
 In this module, you give OpsAgent a memory — the ability to remember facts about the user across turns and inject them as personalized instructions on each call.
 
 You will implement a custom `ContextProvider` that stores a user's name in session state and injects it into the agent's instructions before every run.

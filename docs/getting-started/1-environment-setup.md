@@ -1,7 +1,5 @@
 # 1. Environment Setup
 
-Set up your local development environment to build your own AI agent from scratch. This workshop is designed for you to follow along and build a practical laboratory project.
-
 - [1. Environment Setup](#1-environment-setup)
   - [Prerequisites Checklist](#prerequisites-checklist)
   - [Steps](#steps)
@@ -11,6 +9,8 @@ Set up your local development environment to build your own AI agent from scratc
     - [4. Create Environment File](#4-create-environment-file)
   - [Validation](#validation)
   - [Next](#next)
+
+Set up your local development environment to build your own AI agent from scratch. This workshop is designed for you to follow along and build a practical laboratory project.
 
 ## Prerequisites Checklist
 

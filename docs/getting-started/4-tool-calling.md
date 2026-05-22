@@ -1,5 +1,22 @@
 # 4. Tool Calling
 
+- [4. Tool Calling](#4-tool-calling)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [What Is Tool Calling](#what-is-tool-calling)
+  - [Tool Calling Flow](#tool-calling-flow)
+  - [How to Use the `@tool` Decorator](#how-to-use-the-tool-decorator)
+  - [OpsAgent Tools](#opsagent-tools)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Define the OpsAgent Tools](#step-2---define-the-opsagent-tools)
+  - [Step 3 - Register Tools in the Agent](#step-3---register-tools-in-the-agent)
+  - [Step 4 - Complete Code (Single File)](#step-4---complete-code-single-file)
+  - [Step 5 - Run the Script](#step-5---run-the-script)
+  - [Example Output](#example-output)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Notes On Tool Design](#notes-on-tool-design)
+  - [Next](#next)
+
 In this module, we extend OpsAgent with callable tools so it can take real actions — like checking service health, generating deployment checklists, or diagnosing errors — instead of relying solely on model knowledge.
 
 ## Module Goals

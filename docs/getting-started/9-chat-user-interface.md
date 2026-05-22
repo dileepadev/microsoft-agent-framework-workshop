@@ -1,5 +1,25 @@
 # 9. Chat User Interface
 
+- [9. Chat User Interface](#9-chat-user-interface)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [Folder Structure](#folder-structure)
+  - [Prerequisites](#prerequisites)
+  - [Step 1 — Verify Dependencies](#step-1--verify-dependencies)
+  - [Step 2 — Explore the Shared Layer](#step-2--explore-the-shared-layer)
+  - [Step 3 — Run the CLI](#step-3--run-the-cli)
+  - [Step 4 — Run the Chainlit Web Chat](#step-4--run-the-chainlit-web-chat)
+  - [Step 5 — Run the Streamlit Web Chat](#step-5--run-the-streamlit-web-chat)
+  - [Step 6 — Run the FastAPI API and Client](#step-6--run-the-fastapi-api-and-client)
+    - [Start the server](#start-the-server)
+    - [Endpoints](#endpoints)
+    - [Multi-turn chat request](#multi-turn-chat-request)
+    - [Workflow request](#workflow-request)
+    - [Run the demo client](#run-the-demo-client)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Key Concepts](#key-concepts)
+  - [Next](#next)
+
 Bring all previous modules together in four fully working interfaces: an
 interactive CLI, two web UIs (Chainlit and Streamlit), and a FastAPI REST API
 with a demo client — each powered by the same OpsAgent.

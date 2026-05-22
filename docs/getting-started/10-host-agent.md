@@ -1,5 +1,22 @@
 # 10. Host Agent
 
+- [10. Host Agent](#10-host-agent)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [Folder Structure](#folder-structure)
+  - [Prerequisites](#prerequisites)
+  - [Step 1 — Install the Azure Functions Hosting Package](#step-1--install-the-azure-functions-hosting-package)
+  - [Step 2 — Start Azurite](#step-2--start-azurite)
+  - [Step 3 — Configure `local.settings.json`](#step-3--configure-localsettingsjson)
+  - [Step 4 — Start the Functions Host](#step-4--start-the-functions-host)
+  - [Step 5 — Invoke the Hosted Endpoint](#step-5--invoke-the-hosted-endpoint)
+    - [Single turn](#single-turn)
+    - [Multi-turn conversation](#multi-turn-conversation)
+    - [Async mode (HTTP 202 — fire and forget)](#async-mode-http-202--fire-and-forget)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Key Concepts](#key-concepts)
+  - [Reference](#reference)
+
 Host OpsAgent so users and other agents can reach it over HTTP — deploying the
 same agent built through Modules 4–9 into a production-ready serverless endpoint
 using the Azure Functions (Durable) hosting option.

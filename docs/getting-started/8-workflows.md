@@ -1,5 +1,20 @@
 # 8. Workflows
 
+- [8. Workflows](#8-workflows)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [Why Workflows Matter](#why-workflows-matter)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Ensure GitHub Environment Variables](#step-2---ensure-github-environment-variables)
+  - [Step 3 - Define the Workflow Steps (Executors)](#step-3---define-the-workflow-steps-executors)
+  - [Step 4 - Build the Workflow with WorkflowBuilder](#step-4---build-the-workflow-with-workflowbuilder)
+  - [Step 5 - Complete Code (Single File)](#step-5---complete-code-single-file)
+  - [Run the Script](#run-the-script)
+  - [Example Output](#example-output)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Key Concepts](#key-concepts)
+  - [Next](#next)
+
 In this module, you build a multi-step workflow where each executor processes data and passes it to the next — chaining a Python triage step, an OpsAgent LLM step, and a Python capture step into a single automated pipeline.
 
 ## Module Goals

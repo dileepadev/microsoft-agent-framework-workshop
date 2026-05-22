@@ -1,5 +1,17 @@
 # 3. Microsoft Agent Framework Agents
 
+- [3. Microsoft Agent Framework Agents](#3-microsoft-agent-framework-agents)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [What Is Microsoft Agent Framework?](#what-is-microsoft-agent-framework)
+  - [Agent Execution Flow](#agent-execution-flow)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Add the Agent Code](#step-2---add-the-agent-code)
+  - [Step 3 - Run the Script](#step-3---run-the-script)
+  - [Expected Outcomes](#expected-outcomes)
+  - [Notes On OpsAgent Design](#notes-on-opsagent-design)
+  - [Next](#next)
+
 In this module, we will build our first AI agent using the Microsoft Agent Framework and GitHub Models.
 
 Before integrating Chainlit or building a web UI, we will first understand how agents work directly from the command line (CLI). This helps you focus on core concepts such as prompts, models, streaming, and conversation flow without additional UI complexity.

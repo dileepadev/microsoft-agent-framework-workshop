@@ -1,7 +1,5 @@
 # 2. GitHub Models Connection
 
-In this module, you'll set up access to **GitHub Models** and make your first AI API request using Python.
-
 - [2. GitHub Models Connection](#2-github-models-connection)
   - [Learning Goals](#learning-goals)
   - [Introduction to GitHub Models](#introduction-to-github-models)
@@ -22,6 +20,8 @@ In this module, you'll set up access to **GitHub Models** and make your first AI
   - [Suggested Project Layout](#suggested-project-layout)
   - [Completion Checklist](#completion-checklist)
   - [Next](#next)
+
+In this module, you'll set up access to **GitHub Models** and make your first AI API request using Python.
 
 ## Learning Goals
 

@@ -1,5 +1,19 @@
 # 5. MCP Integration
 
+- [5. MCP Integration](#5-mcp-integration)
+  - [Module Goals](#module-goals)
+  - [In This Module](#in-this-module)
+  - [What Is MCP Integration](#what-is-mcp-integration)
+  - [MCP Flow](#mcp-flow)
+  - [Step 1 - Create the Test Script](#step-1---create-the-test-script)
+  - [Step 2 - Ensure GitHub Environment Variables](#step-2---ensure-github-environment-variables)
+  - [Step 3 - Create the MCP Tool (MCP Only)](#step-3---create-the-mcp-tool-mcp-only)
+  - [Step 4 - Register MCP Tool and Run One Query](#step-4---register-mcp-tool-and-run-one-query)
+  - [Step 5 - Complete Code (Single File)](#step-5---complete-code-single-file)
+    - [Run the Script](#run-the-script)
+    - [Example Output](#example-output)
+  - [Expected Outcomes](#expected-outcomes)
+
 In this module, you connect OpsAgent to a hosted Model Context Protocol (MCP) server from Microsoft Learn so the agent can answer questions with up-to-date documentation context.
 
 ## Module Goals
