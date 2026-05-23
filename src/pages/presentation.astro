@@ -1112,6 +1112,47 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
               >
             </div>
           </article>
+          </article>
+
+          <!-- ═══════════ SLIDE 18: Q1 ═══════════ -->
+          <article class="slide" data-title="Q1" data-index="18">
+            <p class="slide-kicker">Question</p>
+            <h2 class="slide-title">
+              Before the Microsoft Agent Framework, which (two) Microsoft frameworks were used to build AI agents?
+            </h2>
+          </article>
+
+          <!-- ═══════════ SLIDE 19: Q1 Answer ═══════════ -->
+          <article class="slide" data-title="Q1 Answer" data-index="19">
+            <p class="slide-kicker">Answer</p>
+            <h2 class="slide-title">Common Microsoft approaches</h2>
+            <p class="slide-text answer-text">
+              Semantic Kernel and AutoGen.
+            </p>
+          </article>
+
+          <!-- ═══════════ SLIDE 20: Q2 ═══════════ -->
+          <article class="slide" data-title="Q2" data-index="20">
+            <p class="slide-kicker">Question</p>
+            <h2 class="slide-title">What's the difference between a session provider and a context (user memory) provider?</h2>
+          </article>
+
+          <!-- ═══════════ SLIDE 21: Q2 Answer ═══════════ -->
+          <article class="slide" data-title="Q2 Answer" data-index="21">
+            <p class="slide-kicker">Answer</p>
+            <h2 class="slide-title">Session vs Context</h2>
+            <p class="slide-text answer-text">
+              Session providers (e.g., <code>AgentSession</code> / <code>InMemoryHistoryProvider</code>) store ephemeral chat history for the current interaction. Context (user memory) providers persist facts, preferences and user data across sessions using a database (SQLite, Cosmos DB) and are used to inject long‑term knowledge into the agent's context.
+            </p>
+          </article>
+
+          <!-- ═══════════ SLIDE 22: Thank You ═══════════ -->
+          <article class="slide" data-title="Thank You" data-index="22">
+            <p class="slide-kicker">Closing</p>
+            <h2 class="slide-title">Thank You!</h2>
+            <p class="slide-text">Questions? Visit the workshop site at <a href={`${base}/`} class="text-link">${base}/microsoft-agent-framework-workshop</a></p>
+          </article>
+
         </div>
 
         <div
@@ -1316,6 +1357,12 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
       line-height: 1.6;
       color: rgb(75 85 99);
       max-width: 76ch;
+    }
+
+    .answer-text {
+      font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+      line-height: 1.7;
+      max-width: 68ch;
     }
 
     .slide[data-index="5"] .slide-text {
