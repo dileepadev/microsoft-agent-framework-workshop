@@ -1,7 +1,0 @@
-agent-framework
-python-dotenv
-httpx
-openai
-chainlit
-streamlit
-fastapi
