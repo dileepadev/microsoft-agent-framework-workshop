@@ -85,23 +85,40 @@ Participants pick whichever client they prefer — both talk to the same
 The agent code is **identical** for every provider. Only the client changes.
 Participants choose whatever they have a key for, or run fully local.
 
-- [ ] Build `app/providers.py` as a factory keyed on `LLM_PROVIDER`, with `LLM_API_KEY`, `LLM_MODEL` and `LLM_BASE_URL`.
-- [ ] Fail loudly at startup on an unknown provider or a missing variable, naming the exact variable to set.
-- [ ] Cover the dedicated clients: Microsoft Foundry (`FoundryChatClient`), OpenAI and Azure OpenAI (`OpenAIChatClient`), Google AI Studio (`GeminiChatClient`), Anthropic (`AnthropicClient`), Ollama (`OllamaChatClient`), Foundry Local (`FoundryLocalClient`), Amazon Bedrock.
-- [ ] Add an `openai-compatible` catch-all using `OpenAIChatClient(base_url=...)`, which reaches OpenRouter, Groq, Cerebras, Together, Fireworks, DeepSeek, xAI, LM Studio, vLLM and anything else OpenAI-shaped.
-- [ ] Note which packages still need `--pre`: Gemini, Ollama, Anthropic and Foundry Local are beta; `agent-framework-openai` and `agent-framework-foundry` are GA.
-- [ ] Default the demo to Google AI Studio, with Ollama as the offline fallback for unreliable conference wifi.
-- [ ] Write `website` guidance on free tiers now that GitHub Models is gone: Google AI Studio, Groq, Cerebras, OpenRouter, Mistral, and the fully local runtimes.
-- [ ] Do not hardcode default model names for providers whose catalogues churn — a stale name produces a confusing 404 months later.
+- [x] Build `app/providers.py` as a factory keyed on `LLM_PROVIDER`, with `LLM_API_KEY`, `LLM_MODEL` and `LLM_BASE_URL`.
+- [x] Fail loudly at startup on an unknown provider or a missing variable, naming the exact variable to set.
+- [x] Cover the dedicated clients: Microsoft Foundry (`FoundryChatClient`), OpenAI and Azure OpenAI (`OpenAIChatClient`), Google AI Studio (`GeminiChatClient`), Anthropic (`AnthropicClient`), Ollama (`OllamaChatClient`), Foundry Local (`FoundryLocalClient`), Amazon Bedrock (`BedrockChatClient`).
+- [x] Add an `openai-compatible` catch-all using `OpenAIChatClient(base_url=...)`, which reaches OpenRouter, Groq, Cerebras, Together, Fireworks, DeepSeek, xAI, LM Studio, vLLM and anything else OpenAI-shaped.
+- [x] Note which packages still need `--pre`: Gemini, Ollama, Anthropic, Bedrock and Foundry Local are beta; `agent-framework-openai` and `agent-framework-foundry` are GA. In practice `--pre` is not needed — a version specifier that names the prerelease (`>=1.0.0b260813`) permits it under PEP 440.
+- [x] Default the demo to Google AI Studio, with Ollama as the offline fallback for unreliable conference wifi.
+- [ ] Write `website` guidance on free tiers now that GitHub Models is gone: Google AI Studio, Groq, Cerebras, OpenRouter, Mistral, and the fully local runtimes. *(drafted in `app/README.md`; still to be written up on the site in Phase 6)*
+- [x] Do not hardcode default model names for providers whose catalogues churn — a stale name produces a confusing 404 months later. Every provider requires an explicit `LLM_MODEL`, enforced by a test.
+
+> [!Important]
+> Corrections found while building this, against what was assumed above:
+>
+> - Gemini is **`agent-framework-gemini`** / `agent_framework.gemini`. There is no
+>   usable `agent-framework-google` — that name is a placeholder on PyPI, and
+>   `agent_framework.google` holds the Anthropic-on-Vertex client instead.
+> - Bedrock is **`agent_framework.amazon`**, not `agent_framework.bedrock`. The
+>   documentation never states the module path.
+> - The `agent-framework` meta-package resolves to `agent-framework-core[all]`,
+>   which pulls every integration Microsoft ships (a2a, ag-ui, devui, durabletask,
+>   redis, cosmos, mem0, …). `app/` depends on core plus the providers it actually
+>   supports, so `uv sync` stays short on conference wifi.
+> - Importing a provider namespace **succeeds without its package installed** —
+>   core registers a lazy stub that only raises when a class is read off it. Any
+>   "is this provider available?" check has to reach the class, not the module.
 
 ## Phase 1 — Agent core
 
-- [ ] Scaffold `app/` as its own `uv` project on `agent-framework>=1.14.0`.
-- [ ] `config.py`: explicit `load_dotenv()` — the framework does **not** auto-load `.env` any more.
-- [ ] `agent.py`: OpsAgent built from the provider factory.
-- [ ] `tools.py`: operational `@tool` functions (service health, deployment checklist, error diagnosis).
-- [ ] `tests/test_providers.py`: every provider resolves a client without network access.
-- [ ] Pin dependencies. Do not ship an unpinned `requirements.txt` alongside a pinned `pyproject.toml` as v1.0 did.
+- [x] Scaffold `app/` as its own `uv` project on `agent-framework-core>=1.14.0` (see the correction above on the meta-package).
+- [x] `config.py`: explicit `load_dotenv()` — the framework does **not** auto-load `.env` any more.
+- [x] `agent.py`: OpsAgent built from the provider factory.
+- [x] `tools.py`: operational `@tool` functions (service health, deployment checklist, error diagnosis).
+- [x] `tests/test_providers.py`: every provider resolves a client without network access. A fixture blocks `socket.connect` so this is enforced rather than assumed. `foundry-local` is the one exception — `FoundryLocalClient` starts the Foundry runtime inside its constructor, so only its class resolution is covered.
+- [x] Pin dependencies. Do not ship an unpinned `requirements.txt` alongside a pinned `pyproject.toml` as v1.0 did. `uv.lock` is the pin; there is no `requirements.txt`.
+- [ ] Live smoke against a real key — everything so far is verified offline.
 
 ## Phase 2 — Capabilities
 
@@ -170,12 +187,12 @@ Participants pick a host, same as they pick a provider.
 
 ## Verification
 
-- [ ] `uv sync` succeeds independently in `lab/`, `app/` and `client/streamlit/`.
-- [ ] `pytest` green in `app/`.
+- [ ] `uv sync` succeeds independently in `lab/`, `app/` and `client/streamlit/`. *(`app/` done, both bare and `--all-extras`.)*
+- [x] `pytest` green in `app/` — 99 passing with `--all-extras`; 91 passing and 8 skipped on base dependencies, each skip naming the `uv sync --extra` that would enable it.
 - [ ] Work through one `lab/` exercise start to finish against a clean environment, using only the written instructions.
 - [ ] Live smoke against at least two real providers — same prompt, same tools, both answer.
 - [ ] MCP module returns real Microsoft Learn results.
-- [ ] `uvicorn app.api:app` with both clients holding a multi-turn conversation.
+- [ ] `uv run uvicorn api:app` from `app/` with both clients holding a multi-turn conversation. (`app/` is a flat uv application project, so modules import as `config`, `providers`, `agent` — not `app.config`.)
 - [ ] Deploy to one host from a clean clone using only the written guide.
 - [ ] `npm run build` clean in `website/`, every sidebar link resolving.
 - [ ] Read the deck against its own timer to confirm 60 minutes holds.
