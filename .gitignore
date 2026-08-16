@@ -237,3 +237,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# OpsAgent conversation storage — transcripts are user data
+app/.sessions/
