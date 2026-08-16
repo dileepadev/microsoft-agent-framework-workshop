@@ -18,6 +18,10 @@ Swapping the model is a change to `.env`. No code moves.
 | [providers.py](providers.py) | The provider factory — the only file that knows a vendor exists |
 | [agent.py](agent.py) | OpsAgent |
 | [tools.py](tools.py) | `@tool` functions |
+| [mcp.py](mcp.py) | Microsoft Learn MCP server |
+| [memory.py](memory.py) | Sessions, history and user memory |
+| [workflow.py](workflow.py) | The triage workflow |
+| [harness.py](harness.py) | OpsAgent as a Harness agent |
 | [tests/](tests/) | Runs offline, with sockets blocked |
 
 ## Setup
@@ -96,6 +100,53 @@ Set the following in app/.env:
 
 Already set: LLM_MODEL
 ```
+
+## Capabilities
+
+Everything below is written once against the chat client the factory returns, so
+none of it changes when the provider does.
+
+**Tools** — three operational functions in [tools.py](tools.py). Two return canned
+data and say so in their output, because an agent that reports an invented Azure
+status as fact is worse than one with no tools.
+
+**MCP** — the [Microsoft Learn server](mcp.py), hosted by Microsoft and needing no
+key, so it works the same for everyone. It connects lazily, which is why an agent
+holding MCP tools is used with `async with`.
+
+**Sessions and memory** — [memory.py](memory.py). History is the transcript;
+memory is a fact kept out of the transcript and re-injected each turn.
+
+**Workflow** — [workflow.py](workflow.py) runs `triage_input → OpsAgent →
+capture_output`. Severity classification is a keyword match, not a model call:
+routing is the one decision here that has to be reproducible.
+
+**Harness** — [harness.py](harness.py) is OpsAgent built with
+`create_harness_agent`: planning and todos, context compaction, file memory, tool
+approval and observability. Use it when the shape of the work is unknown; use the
+workflow when you already know the steps.
+
+### Persistence, precisely
+
+Conversations are written as JSON under `app/.sessions/` (gitignored). Restart the
+process, reload by session id, and the conversation is still there:
+
+```bash
+uv run python -m agent "my name is Sam, and our API is returning 429s"
+uv run python -m agent "what did I say my name was?"
+```
+
+The second command is a new process that knows nothing except what is on disk.
+
+That is the whole claim, and it is deliberately modest. It is not a database, it
+does not survive an ephemeral host being redeployed, and it does not shard.
+Swapping in Redis, Cosmos or Mem0 means changing the two factories in
+[memory.py](memory.py) and nothing else.
+
+> [!NOTE]
+> `FileHistoryProvider`, `FileSessionStore` and the Harness file store are all
+> marked **experimental** by the framework and warn on construction. They work,
+> but the API may change. Pass `storage_dir=None` for in-memory instead.
 
 ## Adding a provider
 
