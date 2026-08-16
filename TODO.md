@@ -128,11 +128,21 @@ Participants choose whatever they have a key for, or run fully local.
 
 ## Phase 2 — Capabilities
 
-- [ ] Port the Microsoft Learn MCP integration from v1.0 (`https://learn.microsoft.com/api/mcp`).
-- [ ] Multi-turn conversation with `AgentSession`.
-- [ ] Memory via `ContextProvider`. Either implement real file-backed persistence or state plainly that it is in-memory — v1.0 promised SQLite and Cosmos on the slides and shipped neither.
-- [ ] Triage workflow with `WorkflowBuilder`.
-- [ ] **Agent Harness** — new since v1.0 (landed 1.7.0) and now a fourth pillar beside Agents, Workflows and Integrations. Planning and todos, context compaction, file memory, tool approval, observability.
+- [x] Port the Microsoft Learn MCP integration from v1.0 (`https://learn.microsoft.com/api/mcp`).
+- [x] Multi-turn conversation with `AgentSession`, resumable by id through `FileSessionStore`.
+- [x] Memory via `ContextProvider`. **File-backed persistence, for real** — history and session state are written as JSON under `app/.sessions/`, so a conversation survives a restart. Stated plainly rather than promised: it is files, not a database, and `FileHistoryProvider` / `FileSessionStore` are both flagged experimental by the framework.
+- [x] Triage workflow with `WorkflowBuilder`.
+- [x] **Agent Harness** — new since v1.0 (landed 1.7.0) and now a fourth pillar beside Agents, Workflows and Integrations. Planning and todos, context compaction, file memory, tool approval, observability.
+
+> [!Important]
+> Two Phase 2 findings worth carrying into later phases:
+>
+> - The Harness roots its file memory at `Path.cwd() / "agent-file-memory"` when
+>   left alone, so it lands wherever the command was run from. `harness.py` pins
+>   it under `storage_dir` instead.
+> - Web search is a Harness default, but only *where the chosen client supports
+>   it* — which would make the same code behave differently on Gemini and Ollama.
+>   It is off by default here and opt-in via `with_web_search=True`.
 
 ## Phase 3 — Practice lab
 
