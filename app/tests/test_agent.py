@@ -38,7 +38,7 @@ def _tool_names(agent) -> list[str]:
 def agent():
     """OpsAgent on a throwaway client, so no test depends on a real provider."""
     client = create_chat_client(Settings("openai", api_key="fake", model="gpt-4o-mini"))
-    return create_ops_agent(client)
+    return create_ops_agent(client, storage_dir=None)
 
 
 def test_agent_identity(agent):
@@ -70,7 +70,7 @@ def test_same_agent_on_every_provider(
     monkeypatch.delenv(BASE_URL_VAR, raising=False)
 
     # load=False so a developer's real .env cannot decide the outcome.
-    built = create_ops_agent(create_chat_client(Settings.from_env(load=False)))
+    built = create_ops_agent(create_chat_client(Settings.from_env(load=False)), storage_dir=None)
 
     assert type(built.client).__name__ == client_class
     assert built.name == OPSAGENT_NAME
@@ -90,7 +90,7 @@ def test_unconfigured_provider_fails_with_a_readable_message(monkeypatch: pytest
 
 def test_overrides_are_respected():
     client = create_chat_client(Settings("openai", api_key="fake", model="gpt-4o-mini"))
-    built = create_ops_agent(client, tools=[], instructions="Say only 'ok'.")
+    built = create_ops_agent(client, tools=[], instructions="Say only 'ok'.", storage_dir=None)
 
     assert built.default_options["instructions"] == "Say only 'ok'."
     assert not built.default_options.get("tools")
@@ -103,8 +103,8 @@ def test_default_tool_list_is_not_shared_between_agents():
     `create_ops_agent` copies OPSAGENT_TOOLS for exactly this reason.
     """
     client = create_chat_client(Settings("openai", api_key="fake", model="gpt-4o-mini"))
-    first = create_ops_agent(client)
+    first = create_ops_agent(client, storage_dir=None)
     first.default_options["tools"].clear()
 
-    second = create_ops_agent(client)
+    second = create_ops_agent(client, storage_dir=None)
     assert _tool_names(second) == [tool.name for tool in OPSAGENT_TOOLS]
