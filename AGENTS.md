@@ -24,20 +24,22 @@ the concept, show the finished project, walk the build steps. No live coding.
 
 ## Layout
 
-v2.0 is a rebuild, so most of the repo is still the old edition. Know which is which.
+The v2.0 folder structure exists; most of it is still a placeholder. Know which is which.
 
 | Path | Status |
 | --- | --- |
-| `app/` | **v2.0, live.** The demo OpsAgent project — its own `uv` project, with tests |
-| `lab/`, `docs/`, `src/`, `public/` | **v1.0, superseded.** Kept until replaced |
+| `app/` | **Built.** The demo OpsAgent project — its own `uv` project, with tests |
+| `website/` | Own npm project. Astro builds and deploys, but the **content is still v1.0** |
+| `lab/`, `client/`, `deploy/`, `docs/` | Placeholders. See the phase noted in each README |
 
-Planned but not yet created: `client/` (Streamlit + React surfaces), `website/` (Astro
-Starlight), `deploy/`. `lab/` changes meaning in v2.0 — it becomes participant exercises, and the
-demo project it holds today moves to `app/`.
+Each project folder owns its environment. `app/` and (later) `lab/` and `client/streamlit/` are
+separate `uv` projects; `website/` and `client/web/` are separate npm projects. They share
+nothing — install in whichever one you're editing.
 
 > [!IMPORTANT]
-> Don't copy patterns from `lab/`, `docs/` or `src/`. That code targets the retired GitHub
-> Models endpoint and hardcodes one provider — exactly what this edition exists to undo.
+> `website/src/content/docs/` is the v1.0 workshop, written against the retired GitHub Models
+> endpoint with one provider hardcoded — exactly what this edition exists to undo. It is served
+> live until Phase 6 replaces it, so leave it working, but never copy patterns out of it.
 
 ## Toolchain
 
@@ -47,8 +49,8 @@ demo project it holds today moves to `app/`.
 - Run the API with the **FastAPI CLI**, not `uvicorn` directly:
   `uv run fastapi dev api.py` while developing, `uv run fastapi run api.py` to serve.
   (`app/api.py` is Phase 4 and not built yet — this is the convention it must follow.)
-- Node + npm for the site, once `website/` exists. It will be its own project with its own
-  lockfile.
+- Node + npm for the site, from `website/` — `cd website && npm install`, `npm run build`.
+  It has its own lockfile and shares nothing with the repo root, which has no npm project.
 
 ## Coding standards
 
@@ -74,8 +76,10 @@ demo project it holds today moves to `app/`.
 ## Docs
 
 - Update [app/README.md](app/README.md) alongside any change to the provider contract.
-- Root `README.md` still describes v1.0 and the retired GitHub Models flow. Don't cite it as
-  current.
+- Teaching content is `website/src/content/docs/`, surfaced by the `docs` content collection in
+  `website/src/content/config.ts`. Root `docs/` is for facilitator materials, not participants.
+- The site deploys to GitHub Pages from `website/` via `.github/workflows/docs.yml`. Moving or
+  renaming anything under `website/` means checking that workflow.
 
 ## Git workflow
 

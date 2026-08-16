@@ -45,6 +45,12 @@ which are plain files with no environment of their own.
 > `lab/` changes meaning in v2.0. In v1.0 it held the entire application; here it
 > holds only the participant exercises, and the demo project moves to `app/`.
 > Anyone returning from v1.0 will expect the old layout.
+<!-- -->
+> [!Note]
+> The folder structure now exists. `app/` is built; `website/` holds the Astro
+> project and its v1.0 content, moved out of the repo root; `lab/`, `client/`,
+> `deploy/` and `docs/` are placeholders carrying a README that names the phase
+> which fills them.
 
 | Folder | Purpose | Environment |
 | --- | --- | --- |
