@@ -141,7 +141,7 @@ The exercises participants work through afterwards, mirroring the capabilities i
 
 ## Phase 4 — Client surfaces
 
-- [ ] `app/api.py`: FastAPI with streaming and multi-turn session handling.
+- [ ] `app/api.py`: FastAPI with streaming and multi-turn session handling. Depend on `fastapi[standard]` and run it with the FastAPI CLI (`uv run fastapi dev api.py`), not `uvicorn` directly.
 - [ ] `client/streamlit/`: own `uv` project.
 - [ ] `client/web/`: Vite + React, own npm project, deployable as static files.
 - [ ] Both clients configured by a single API base URL so either can point at local or deployed.
@@ -192,7 +192,7 @@ Participants pick a host, same as they pick a provider.
 - [ ] Work through one `lab/` exercise start to finish against a clean environment, using only the written instructions.
 - [ ] Live smoke against at least two real providers — same prompt, same tools, both answer.
 - [ ] MCP module returns real Microsoft Learn results.
-- [ ] `uv run uvicorn api:app` from `app/` with both clients holding a multi-turn conversation. (`app/` is a flat uv application project, so modules import as `config`, `providers`, `agent` — not `app.config`.)
+- [ ] `uv run fastapi dev api.py` from `app/` with both clients holding a multi-turn conversation. (`app/` is a flat uv application project, so modules import as `config`, `providers`, `agent` — not `app.config`.)
 - [ ] Deploy to one host from a clean clone using only the written guide.
 - [ ] `npm run build` clean in `website/`, every sidebar link resolving.
 - [ ] Read the deck against its own timer to confirm 60 minutes holds.
