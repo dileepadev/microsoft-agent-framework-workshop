@@ -1,0 +1,42 @@
+[project]
+name = "opsagent"
+version = "0.1.0"
+description = "OpsAgent — the demo agent for the Microsoft Agent Framework workshop."
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+
+# One agent core. The provider packages below are what "swap the model" costs.
+#
+# agent-framework (the meta-package) resolves to agent-framework-core[all], which
+# pulls every integration Microsoft ships — a2a, ag-ui, devui, durabletask, redis,
+# cosmos, mem0 and more. That is a long sync on conference wifi, so this project
+# names the providers it actually supports instead.
+dependencies = [
+    "agent-framework-core>=1.14.0",
+    # GA. Covers the `openai`, `azure-openai` and `openai-compatible` providers.
+    "agent-framework-openai>=1.13.0",
+    # Beta. The workshop default — Google AI Studio has a free tier.
+    "agent-framework-gemini>=1.0.0b260813",
+    # Beta. The offline fallback when the wifi gives out.
+    "agent-framework-ollama>=1.0.0b260813",
+    "python-dotenv>=1.1.0",
+]
+
+# Providers that carry heavy or cloud-specific SDKs. Install only what you use:
+#   uv sync --extra anthropic
+[project.optional-dependencies]
+anthropic = ["agent-framework-anthropic>=1.0.0b260730"]
+bedrock = ["agent-framework-bedrock>=1.0.0b260730"]
+foundry = ["agent-framework-foundry>=1.11.0", "azure-identity>=1.19.0"]
+foundry-local = ["agent-framework-foundry-local>=1.0.0b260730"]
+
+[dependency-groups]
+dev = ["pytest>=8.3.0", "pytest-asyncio>=1.0.0"]
+
+[tool.uv]
+# An application, not a library — uv manages the venv but installs nothing.
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
