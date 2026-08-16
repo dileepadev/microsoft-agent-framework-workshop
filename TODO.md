@@ -163,7 +163,8 @@ Participants pick a host, same as they pick a provider.
 - [ ] Update issue [#1](https://github.com/dileepadev/microsoft-agent-framework-workshop/issues/1) with the final scope.
 - [ ] Correct the v1.0 changelog entry, which claims "two deployed frontends" where the repo has four and none deployed.
 - [ ] Commit the community standards files.
-- [ ] Bump `package.json` to `2.0.0` and tag `v2.0.0`.
+- [ ] Set an initial version in each module manifest (`app/`, `lab/`, `client/streamlit/`, `client/web/`, `website/`) per [VERSIONING.md](VERSIONING.md).
+- [ ] Tag the repository release `v2.0` — two-part at repo scope, three-part inside modules.
 
 ---
 
