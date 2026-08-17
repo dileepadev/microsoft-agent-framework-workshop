@@ -240,3 +240,7 @@ __marimo__/
 
 # OpsAgent conversation storage — transcripts are user data
 app/.sessions/
+
+# lab/ exercise state — transcripts and file memory are also user data
+lab/exercises/sessions/.sessions/
+lab/exercises/harness/.harness-memory/

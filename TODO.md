@@ -47,8 +47,8 @@ which are plain files with no environment of their own.
 > Anyone returning from v1.0 will expect the old layout.
 <!-- -->
 > [!Note]
-> The folder structure now exists. `app/` is built; `website/` holds the Astro
-> project and its v1.0 content, moved out of the repo root; `lab/`, `client/`,
+> The folder structure now exists. `app/` and `lab/` are built; `website/` holds
+> the Astro project and its v1.0 content, moved out of the repo root; `client/`,
 > `deploy/` and `docs/` are placeholders carrying a README that names the phase
 > which fills them.
 
@@ -149,11 +149,21 @@ Participants choose whatever they have a key for, or run fully local.
 The exercises participants work through afterwards, mirroring the capabilities in
 `app/` one at a time.
 
-- [ ] Scaffold `lab/` as its own `uv` project, independent of `app/`.
-- [ ] One self-contained exercise per capability: first agent, tools, MCP, sessions, memory, workflow, harness.
-- [ ] Each exercise runnable on its own, with the provider factory shared so a participant can use whichever provider they picked.
-- [ ] Include a worked solution for each exercise.
-- [ ] Give `lab/` a real README. v1.0 shipped a 0-byte one that `pyproject.toml` still referenced.
+- [x] Scaffold `lab/` as its own `uv` project, independent of `app/`.
+- [x] One self-contained exercise per capability: first agent, tools, MCP, sessions, memory, workflow, harness.
+- [x] Each exercise runnable on its own, with the provider factory shared so a participant can use whichever provider they picked.
+- [x] Include a worked solution for each exercise.
+- [x] Give `lab/` a real README. v1.0 shipped a 0-byte one that `pyproject.toml` still referenced.
+
+> [!Important]
+> A Phase 3 finding worth carrying into Phase 4: `app/workflow.py` builds a
+> `Workflow` and tests that it builds, but never actually runs one, so the
+> output-retrieval API wasn't yet established anywhere in this repo. Confirmed
+> against the Microsoft Learn docs (`WorkflowBuilder`, `WorkflowRunResult`)
+> rather than guessed: `events = await workflow.run(input)`, then
+> `events.get_outputs()` returns the list of values passed to
+> `ctx.yield_output(...)`. `api.py` will need this to expose the triage
+> workflow over HTTP.
 
 ## Phase 4 — Client surfaces
 
@@ -203,7 +213,7 @@ Participants pick a host, same as they pick a provider.
 
 ## Verification
 
-- [ ] `uv sync` succeeds independently in `lab/`, `app/` and `client/streamlit/`. *(`app/` done, both bare and `--all-extras`.)*
+- [ ] `uv sync` succeeds independently in `lab/`, `app/` and `client/streamlit/`. *(`app/` and `lab/` done, both bare and `--all-extras`; `client/streamlit/` is Phase 4.)*
 - [x] `pytest` green in `app/` — 99 passing with `--all-extras`; 91 passing and 8 skipped on base dependencies, each skip naming the `uv sync --extra` that would enable it.
 - [ ] Work through one `lab/` exercise start to finish against a clean environment, using only the written instructions.
 - [ ] Live smoke against at least two real providers — same prompt, same tools, both answer.

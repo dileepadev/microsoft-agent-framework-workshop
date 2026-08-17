@@ -29,10 +29,11 @@ The v2.0 folder structure exists; most of it is still a placeholder. Know which 
 | Path | Status |
 | --- | --- |
 | `app/` | **Built.** The demo OpsAgent project — its own `uv` project, with tests |
+| `lab/` | **Built.** Practice exercises mirroring `app/`'s capabilities — its own `uv` project, no tests |
 | `website/` | Own npm project. Astro builds and deploys, but the **content is still v1.0** |
-| `lab/`, `client/`, `deploy/`, `docs/` | Placeholders. See the phase noted in each README |
+| `client/`, `deploy/`, `docs/` | Placeholders. See the phase noted in each README |
 
-Each project folder owns its environment. `app/` and (later) `lab/` and `client/streamlit/` are
+Each project folder owns its environment. `app/`, `lab/` and (later) `client/streamlit/` are
 separate `uv` projects; `website/` and `client/web/` are separate npm projects. They share
 nothing — install in whichever one you're editing.
 
